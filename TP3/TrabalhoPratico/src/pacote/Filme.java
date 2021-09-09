@@ -8,4 +8,43 @@ public class Filme {
 	protected int classifIndicativa;
 	protected String genero;
 	
+	
+	
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	public String getDataLancamento() {
+		return dataLancamento;
+	}
+	public void setDataLancamento(String dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+	public int getDuracao() {
+		return duracao;
+	}
+	public void setDuracao(int duracao) {
+		this.duracao = duracao;
+	}
+	public String getLinguagem() {
+		return linguagem;
+	}
+	public void setLinguagem(String linguagem) {
+		this.linguagem = linguagem;
+	}
+	public int getClassifIndicativa() {
+		return classifIndicativa;
+	}
+	public void setClassifIndicativa(int classifIndicativa) {
+		this.classifIndicativa = classifIndicativa;
+	}
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+	
 }

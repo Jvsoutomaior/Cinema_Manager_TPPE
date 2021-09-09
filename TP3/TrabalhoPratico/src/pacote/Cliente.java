@@ -1,6 +1,16 @@
 package pacote;
 
 public class Cliente extends Pessoa  {
-	protected Fidelidade fidelidade;
+	private Fidelidade fidelidade;
+
 	
+	
+	public Fidelidade getFidelidade() {
+		return fidelidade;
+	}
+	public void setFidelidade(Fidelidade fidelidade) {
+		this.fidelidade = fidelidade;
+	}
+	
+
 }
