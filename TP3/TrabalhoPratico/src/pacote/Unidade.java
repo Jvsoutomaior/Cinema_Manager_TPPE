@@ -6,6 +6,16 @@ public class Unidade {
 	protected String shopping;
 	
 	
+	Unidade(String r, String e, String s){
+		regiao = r;
+		endereco = e;
+		shopping = s;
+	}
+	
+	public String toString() {
+		return shopping;
+	}
+	
 	
 	public String getRegiao() {
 		return regiao;

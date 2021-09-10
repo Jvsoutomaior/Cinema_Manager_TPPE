@@ -4,7 +4,7 @@ public abstract class Pessoa {
 	protected String nome;
 	protected String cpf;
 	protected int idade;
-	protected Unidade unidade;
+	protected Unidade unidade; // Unidade em que a pessoa foi cadastrada
 	protected String email;
 	
 	

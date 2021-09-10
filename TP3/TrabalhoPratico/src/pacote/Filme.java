@@ -8,6 +8,20 @@ public class Filme {
 	protected int classifIndicativa;
 	protected String genero;
 	
+	Filme(){}
+	Filme(String t, String dL, int d, String l, int cI, String g){
+		titulo = t;
+		dataLancamento = dL;
+		duracao = d;
+		linguagem = l;
+		classifIndicativa = cI;
+		genero = g;
+	}
+	
+	
+	public String toString() {
+		 return "Título: "+titulo+ "\nData de Lancamento: "+dataLancamento;
+	}
 	
 	
 	public String getTitulo() {

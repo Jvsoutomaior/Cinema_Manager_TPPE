@@ -7,6 +7,22 @@ public class Sessao {
 	protected Unidade unidade;
 	protected boolean is3d;
 	
+	Sessao(){
+		
+	}
+	
+	Sessao(int nS, Filme f, String h, Unidade u, boolean i3){
+		numeroSala = nS;
+		filme = f;
+		horario = h;
+		unidade = u;
+		is3d = i3;
+	}
+	
+	
+	public String toString() {
+		 return filme.titulo+" na sala "+numeroSala+" às "+horario+", Divirta-se!";
+	}
 	
 	public int getNumeroSala() {
 		return numeroSala;
