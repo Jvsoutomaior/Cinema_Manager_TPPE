@@ -26,8 +26,15 @@ public class ClasseMain {
 		
 		do {
 		imprimeMenu();
-		opcao =
-		}while (opcao!=7);
+		opcao = ler.nextInt();
+		
+		switch (opcao) {
+		case 1:
+			menuFilme();
+			break;
+		}
+		
+		} while (opcao!=7);
 		
 		
 	}
@@ -36,8 +43,17 @@ public class ClasseMain {
 		System.out.println("\tEscolha a opção do menu");
 		System.out.println("1 - Configurações de filme");
 		System.out.println("2 - Configurações de sessão");
-		System.out.println("");
+		System.out.println("3 - Configurçãoes de unidade");
+		System.out.println("4 - Configurçãoes de cliente");
+		System.out.println("5 - Configurçãoes de funcionário");
 	}
 
+	static void menuFilme() {
+		System.out.println("1 - Listar filmes (e editar/apaga-los)");
+		System.out.println("2 - Cadastrar novo filme");
+	}
 	
+	static void menuSessao() {
+		System.out.println("3 - Configurçãoes de unidade");
+	}
 }
