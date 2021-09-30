@@ -1,4 +1,4 @@
-package pacote;
+package models;
 
 public abstract class Pessoa {
 	protected String nome;

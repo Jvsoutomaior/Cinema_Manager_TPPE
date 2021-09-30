@@ -1,4 +1,4 @@
-package pacote;
+package models;
 
 public class Sessao {
 	protected int numeroSala;

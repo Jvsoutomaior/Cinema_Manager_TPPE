@@ -1,11 +1,50 @@
-package pacote;
+package models;
 
-import java.util.Scanner;
-
-public class ClasseMain {
-
-	public static void main(String[] args) {
-		int opcao;
+public class Dados {
+	private Filme[] filmes = new Filme[50];
+	private int qtdFilmes = 0;
+	
+	
+	public void preencheDataBase() {
+		 for (int i=0; i<5; i++) {
+			 int n = i+1;
+			 filmes[i] = new Filme(("filme"+n), ("0"+n+"/0"+n+"/200"+n), 100+n, "Dublado", 2, "Comédia/Drama");
+		 }
+		 qtdFilmes = 5;
+	}
+	
+	
+	public Filme[] getFilmes() {
+		return filmes;
+	}
+	public void setFilmes(Filme[] filmes) {
+		this.filmes = filmes;
+	}
+	
+	public void inserirEditarFilme(Filme f, int pos) {
+		this.filmes[pos] = f;
+		if(pos==qtdFilmes) qtdFilmes++; 
+	}
+	
+	public int getQtdFilmes() {
+		return qtdFilmes;
+	}
+	public void setQtdFilmes(int qtdFilmes) {
+		this.qtdFilmes = qtdFilmes;
+	} 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 		
 			Scanner ler = new Scanner(System.in);
 		
@@ -23,37 +62,7 @@ public class ClasseMain {
 			
 			Cliente cli1 = new Cliente("André", "65484235128", 19, uni2, "dre@gmail.com", 1);
 			Cliente cli2 = new Cliente("Sérgio","68452257879", 53, uni1, "email@email.com", 3);
-		
-		do {
-		imprimeMenu();
-		opcao = ler.nextInt();
-		
-		switch (opcao) {
-		case 1:
-			menuFilme();
-			break;
-		}
-		
-		} while (opcao!=7);
-		
-		
-	}
-
-	static void imprimeMenu() {
-		System.out.println("\tEscolha a opção do menu");
-		System.out.println("1 - Configurações de filme");
-		System.out.println("2 - Configurações de sessão");
-		System.out.println("3 - Configurçãoes de unidade");
-		System.out.println("4 - Configurçãoes de cliente");
-		System.out.println("5 - Configurçãoes de funcionário");
-	}
-
-	static void menuFilme() {
-		System.out.println("1 - Listar filmes (e editar/apaga-los)");
-		System.out.println("2 - Cadastrar novo filme");
-	}
+		*/
 	
-	static void menuSessao() {
-		System.out.println("3 - Configurçãoes de unidade");
-	}
+
 }

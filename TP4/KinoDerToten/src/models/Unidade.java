@@ -1,4 +1,4 @@
-package pacote;
+package models;
 
 public class Unidade {
 	protected String regiao;

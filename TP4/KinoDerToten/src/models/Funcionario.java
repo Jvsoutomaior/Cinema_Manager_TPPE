@@ -1,4 +1,4 @@
-package pacote;
+package models;
 
 public class Funcionario extends Pessoa {
 	protected String turno;

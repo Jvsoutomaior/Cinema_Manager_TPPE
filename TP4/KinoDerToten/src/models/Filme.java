@@ -1,4 +1,4 @@
-package pacote;
+package models;
 
 public class Filme {
 	protected String titulo;
@@ -9,7 +9,7 @@ public class Filme {
 	protected String genero;
 	
 	Filme(){}
-	Filme(String t, String dL, int d, String l, int cI, String g){
+	public Filme(String t, String dL, int d, String l, int cI, String g){
 		titulo = t;
 		dataLancamento = dL;
 		duracao = d;

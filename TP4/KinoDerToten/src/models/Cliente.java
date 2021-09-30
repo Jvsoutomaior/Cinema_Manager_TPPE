@@ -1,4 +1,4 @@
-package pacote;
+package models;
 
 public class Cliente extends Pessoa  {
 	private int fidelidade;
