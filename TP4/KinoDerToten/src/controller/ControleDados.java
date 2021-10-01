@@ -14,7 +14,6 @@ public class ControleDados {
 	public Dados getDados() {
 		return d;
 	}
-	
 	public void setDados(Dados d) {
 		this.d = d;
 	}
@@ -22,7 +21,6 @@ public class ControleDados {
 	public Filme[] getFilmes() {
 		return this.d.getFilmes();
 	}
-	
 	public int getQtdFilmes() {
 		return this.d.getQtdFilmes();
 	}
@@ -41,13 +39,53 @@ public class ControleDados {
 		return this.d.getQtdUnidades();
 	}
 	
+	public Cliente[] getClientes() {
+		return this.d.getClientes();
+	}
+	public int getQtdClientes() {
+		return this.d.getQtdClientes();
+	}
+	
+	public Filme getFilmeFromTitulo(String s) {
+		//Filme film = ControleDados.getDados().getFilmes()[0];
+		Filme film = d.getFilmes()[0];
+		String aux;
+		
+		for(int i=0; i<getQtdFilmes(); i++) {
+			aux = d.getFilmes()[i].getTitulo();
+			if(s.compareTo(aux)==0) {
+				//film = ControleDados.getDados().getFilmes()[i];
+				film = d.getFilmes()[i];				
+			}
+		}
+		return film;
+	}
+	
+	public Unidade getUnidadeFromShopping(String s) {
+		Unidade uni = d.getUnidades()[0];
+		String aux;
+		
+		for(int i=0; i<getQtdUnidades(); i++) {
+			aux = d.getUnidades()[i].getShopping();
+			if(s.compareTo(aux)==0) {
+				uni = d.getUnidades()[i];
+				
+			}
+		}
+		return uni;
+	}	
+	
+	public boolean retornaBool(String s) {
+		if(s=="1") return true;
+		else return false;
+	}
 	
 	public boolean inserirEditarFilme(String[] dadoNovo) {
 		//if(!dadosFilmes[3].matches("[0-9]+") || !dadosFilmes[4].matches("[0-9]+") || 
 				//!dadosFilmes[5].matches("[0-9]+") || !dadosProfs[6].matches("[0-9]+")) {
 		//	return false;
 	//	} else {
-				Filme f = new Filme(dadoNovo[1], dadoNovo[2], Integer.parseInt(dadoNovo[3]), dadoNovo[4], Integer.parseInt(dadoNovo[5]), dadoNovo[6]);
+				Filme f = new Filme(dadoNovo[1], dadoNovo[2], Integer.parseInt(dadoNovo[3]),  dadoNovo[4], Integer.parseInt(dadoNovo[5]), dadoNovo[6]);
 				d.inserirEditarFilme(f, Integer.parseInt(dadoNovo[0]));
 				return true;
 		//}
@@ -64,4 +102,16 @@ public class ControleDados {
 		
 		return true;
 	}
+
+	public boolean inserirEditarSessao(String[] dadoNovo) {
+		//if(!dadosFilmes[3].matches("[0-9]+") || !dadosFilmes[4].matches("[0-9]+") || 
+			//!dadosFilmes[5].matches("[0-9]+") || !dadosProfs[6].matches("[0-9]+")) {
+			//return false;
+	//	} else {
+			Sessao sess = new Sessao(getFilmeFromTitulo(dadoNovo[1]), dadoNovo[2], getUnidadeFromShopping(dadoNovo[3]), Integer.parseInt(dadoNovo[4]), retornaBool(dadoNovo[5]));
+			d.inserirEditarSessao(sess, Integer.parseInt(dadoNovo[0]));
+			return true;
+		//}
+	}
+
 }

@@ -52,6 +52,7 @@ public class TelaPrincipal implements ActionListener {
 
 		sessao.addActionListener(menu);
 		filme.addActionListener(menu);
+		cliente.addActionListener(menu);
 	}
 
 	
@@ -64,10 +65,10 @@ public class TelaPrincipal implements ActionListener {
 		
 		if(src==sessao)
 			new TelaSessao(dados);
-		/*
-		if(src==cliente)
-			new TelaCliente();
 		
+		if(src==cliente)
+			new TelaCliente(dados);
+		/*
 		if(src==funcionario)
 			new telaFuncionario();
 			*/

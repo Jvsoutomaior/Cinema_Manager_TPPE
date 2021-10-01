@@ -3,7 +3,7 @@ package models;
 public abstract class Pessoa {
 	protected String nome;
 	protected String cpf;
-	protected int idade;
+	protected String dataNasc;
 	protected Unidade unidade; // Unidade em que a pessoa foi cadastrada
 	protected String email;
 	
@@ -20,11 +20,11 @@ public abstract class Pessoa {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public int getIdade() {
-		return idade;
+	public String getDataNasc() {
+		return getDataNasc();
 	}
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setDataNasc(String dataNasc) {
+		this.dataNasc = getDataNasc();
 	}
 	public Unidade getUnidade() {
 		return unidade;

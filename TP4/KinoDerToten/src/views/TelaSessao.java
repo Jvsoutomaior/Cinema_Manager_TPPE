@@ -2,8 +2,6 @@ package views;
 
 import javax.swing.*;
 import controller.*;
-import models.Filme;
-import models.Unidade;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -17,7 +15,7 @@ public class TelaSessao implements ActionListener, ListSelectionListener{
 	private JLabel titulo = new JLabel("Sessões");
 	private JList<String> listaSessoes;
 	private String[] listaDetalhes = new String[50];
-	private	JButton criar = new JButton("Adicionar"); 
+	private	JButton criar = new JButton("Criar"); 
 	private JButton atualizar = new JButton("Atualizar");
 	private JButton voltar = new JButton("Voltar");
 	private static ControleDados dados;
@@ -67,7 +65,10 @@ public class TelaSessao implements ActionListener, ListSelectionListener{
 	
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
+		Object src = e.getSource();
+		
+		if(e.getValueIsAdjusting() && src==listaSessoes)
+			new TelaDetalheSessao().exibeSessao(dados, listaSessoes.getSelectedIndex());
 		
 	}
 
@@ -77,10 +78,10 @@ public class TelaSessao implements ActionListener, ListSelectionListener{
 		
 		
 		if(src == criar)
-			new TelaDetalheFilme().adicionaFilme(1, dados);
+			new TelaDetalheSessao().criaSessao(1, dados);
 		
 		if(src == atualizar)
-			listaSessoes.setListData(new ControleFilme(dados).getTituloFilme());
+			listaSessoes.setListData(new ControleSessao(dados).displaySessaoOnJList());
 			listaSessoes.updateUI();
 			
 		if(src == voltar) {

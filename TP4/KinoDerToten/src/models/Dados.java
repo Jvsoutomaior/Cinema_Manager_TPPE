@@ -7,6 +7,8 @@ public class Dados {
 	private int qtdUnidades = 0;
 	private Sessao[] sessoes = new Sessao[20];
 	private int qtdSessoes = 0;
+	private Cliente[] clientes = new Cliente[20];
+	private int qtdClientes = 0;
 	
 	
 	public void preencheDataBase() {
@@ -19,11 +21,13 @@ public class Dados {
 			 
 			 filmes[i] = new Filme(("filme"+n), ("0"+n+"/0"+n+"/200"+n), 100+n, "Dublado", i, "Comédia/Drama");
 			 unidades[i] = new Unidade("Bairro"+n, "Quadra"+ n, "Shopping"+n);
-			 sessoes[i] = new Sessao(n, filmes[i], ("0"+n+":"+n+"0"), unidades[i], alterna);
+			 sessoes[i] = new Sessao(filmes[i], ("0"+n+":"+n+"0"), unidades[i], n, alterna);
+			 clientes[i] = new Cliente("Cliente"+n, "01230123"+n, ("0"+n+"/0"+n+"/200"+n), unidades[i], n+"@gmail.com", 1);
 		 }
 		 qtdFilmes = 5;
 		 qtdSessoes = 5;
 		 qtdUnidades = 5;
+		 qtdClientes = 5;
 	}
 	
 	
@@ -33,12 +37,10 @@ public class Dados {
 	public void setFilmes(Filme[] filmes) {
 		this.filmes = filmes;
 	}
-	
 	public void inserirEditarFilme(Filme f, int pos) {
 		this.filmes[pos] = f;
 		if(pos==qtdFilmes) qtdFilmes++; 
 	}
-	
 	public int getQtdFilmes() {
 		return qtdFilmes;
 	}
@@ -50,19 +52,13 @@ public class Dados {
 	public Unidade[] getUnidades() {
 		return unidades;
 	}
-
-
 	public void setUnidades(Unidade[] unidades) {
 		this.unidades = unidades;
 	}
-
-
 	public int getQtdUnidades() {
 		return qtdUnidades;
 	}
-
-
-	public void setQtdUnidade(int qtdUnidade) {
+	public void setQtdUnidades(int qtdUnidade) {
 		this.qtdUnidades = qtdUnidade;
 	}
 
@@ -70,22 +66,35 @@ public class Dados {
 	public Sessao[] getSessoes() {
 		return sessoes;
 	}
-
-
 	public void setSessoes(Sessao[] sessoes) {
 		this.sessoes = sessoes;
 	}
-
-
 	public int getQtdSessoes() {
 		return qtdSessoes;
-	}
-
-
+	}	
 	public void setQtdSessoes(int qtdSessoes) {
 		this.qtdSessoes = qtdSessoes;
 	} 
-	
+	public void inserirEditarSessao(Sessao s, int pos) {
+		this.sessoes[pos] = s;
+		if(pos==qtdSessoes) qtdFilmes++; 
+	}
+
+
+	public Cliente[] getClientes() {
+		return clientes;
+	}
+	public void setClientes(Cliente[] clientes) {
+		this.clientes = clientes;
+	}
+	public int getQtdClientes() {
+		return qtdClientes;
+	}
+	public void setQtdClientes(int qtdClientes) {
+		this.qtdClientes = qtdClientes;
+	}
+
+
 	
 	
 	

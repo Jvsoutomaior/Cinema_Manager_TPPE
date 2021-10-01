@@ -4,10 +4,10 @@ public class Funcionario extends Pessoa {
 	protected String turno;
 	protected String salario;
 	
-	Funcionario(String n, String c, int i, Unidade u, String e, String t, String s){
+	Funcionario(String n, String c, String i, Unidade u, String e, String t, String s){
 		nome = n;
 		cpf = c;
-		idade = i;
+		dataNasc = i;
 		unidade = u;
 		email = e;
 		turno = t;
