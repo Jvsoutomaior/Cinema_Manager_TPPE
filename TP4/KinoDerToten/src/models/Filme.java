@@ -54,6 +54,18 @@ public class Filme {
 	public void setClassifIndicativa(int classifIndicativa) {
 		this.classifIndicativa = classifIndicativa;
 	}
+	
+	public String getValueClassInd() {
+		String retorna="Livre";
+		if (classifIndicativa==1) retorna="10";
+		if (classifIndicativa==2) retorna="12";
+		if (classifIndicativa==3) retorna="14";
+		if (classifIndicativa==4) retorna="16";
+		if (classifIndicativa==5) retorna="18";
+		
+		return retorna;
+	}
+	
 	public String getGenero() {
 		return genero;
 	}

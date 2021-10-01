@@ -50,7 +50,7 @@ public class TelaPrincipal implements ActionListener {
 	public static void main(String[] args) {
 		TelaPrincipal menu = new TelaPrincipal();
 
-		
+		sessao.addActionListener(menu);
 		filme.addActionListener(menu);
 	}
 
@@ -61,10 +61,10 @@ public class TelaPrincipal implements ActionListener {
 		
 		if(src==filme)
 			new TelaFilme(dados);
-		/*
-		if(src==sessao)
-			new TelaSessao();
 		
+		if(src==sessao)
+			new TelaSessao(dados);
+		/*
 		if(src==cliente)
 			new TelaCliente();
 		

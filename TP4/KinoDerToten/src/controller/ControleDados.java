@@ -27,6 +27,20 @@ public class ControleDados {
 		return this.d.getQtdFilmes();
 	}
 	
+	public Sessao[] getSessoes() {
+		return this.d.getSessoes();
+	}
+	public int getQtdSessoes() {
+		return this.d.getQtdSessoes();
+	}
+	
+	public Unidade[] getUnidades() {
+		return this.d.getUnidades();
+	}
+	public int getQtdUnidades() {
+		return this.d.getQtdUnidades();
+	}
+	
 	
 	public boolean inserirEditarFilme(String[] dadoNovo) {
 		//if(!dadosFilmes[3].matches("[0-9]+") || !dadosFilmes[4].matches("[0-9]+") || 

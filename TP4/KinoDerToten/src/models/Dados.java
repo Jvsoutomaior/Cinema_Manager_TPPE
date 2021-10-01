@@ -1,16 +1,29 @@
 package models;
 
 public class Dados {
-	private Filme[] filmes = new Filme[50];
+	private Filme[] filmes = new Filme[20];
 	private int qtdFilmes = 0;
+	private Unidade[] unidades = new Unidade[20];
+	private int qtdUnidades = 0;
+	private Sessao[] sessoes = new Sessao[20];
+	private int qtdSessoes = 0;
 	
 	
 	public void preencheDataBase() {
+		boolean alterna;
 		 for (int i=0; i<5; i++) {
 			 int n = i+1;
-			 filmes[i] = new Filme(("filme"+n), ("0"+n+"/0"+n+"/200"+n), 100+n, "Dublado", 2, "Comédia/Drama");
+			 
+			 if(i%2==0)  alterna = true;
+			 else alterna = false;
+			 
+			 filmes[i] = new Filme(("filme"+n), ("0"+n+"/0"+n+"/200"+n), 100+n, "Dublado", i, "Comédia/Drama");
+			 unidades[i] = new Unidade("Bairro"+n, "Quadra"+ n, "Shopping"+n);
+			 sessoes[i] = new Sessao(n, filmes[i], ("0"+n+":"+n+"0"), unidades[i], alterna);
 		 }
 		 qtdFilmes = 5;
+		 qtdSessoes = 5;
+		 qtdUnidades = 5;
 	}
 	
 	
@@ -31,6 +44,46 @@ public class Dados {
 	}
 	public void setQtdFilmes(int qtdFilmes) {
 		this.qtdFilmes = qtdFilmes;
+	}
+
+
+	public Unidade[] getUnidades() {
+		return unidades;
+	}
+
+
+	public void setUnidades(Unidade[] unidades) {
+		this.unidades = unidades;
+	}
+
+
+	public int getQtdUnidades() {
+		return qtdUnidades;
+	}
+
+
+	public void setQtdUnidade(int qtdUnidade) {
+		this.qtdUnidades = qtdUnidade;
+	}
+
+
+	public Sessao[] getSessoes() {
+		return sessoes;
+	}
+
+
+	public void setSessoes(Sessao[] sessoes) {
+		this.sessoes = sessoes;
+	}
+
+
+	public int getQtdSessoes() {
+		return qtdSessoes;
+	}
+
+
+	public void setQtdSessoes(int qtdSessoes) {
+		this.qtdSessoes = qtdSessoes;
 	} 
 	
 	

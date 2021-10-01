@@ -8,9 +8,7 @@ public class Sessao {
 	protected boolean is3d;
 	
 	Sessao(){
-		
 	}
-	
 	Sessao(int nS, Filme f, String h, Unidade u, boolean i3){
 		numeroSala = nS;
 		filme = f;

@@ -12,14 +12,13 @@ public class TelaDetalheFilme implements ActionListener{
 	//private JPanel p = new JPanel();
 	private JLabel labelTitle = new JLabel("Título:");
 	private JLabel labelDataLanc = new JLabel("Lancamento:");
-	private JLabel labelDuracao = new JLabel("Duaração:");
+	private JLabel labelDuracao = new JLabel("Duração:");
 	private JLabel labelLing = new JLabel("Linguagem:");
 	private JLabel labelClassInd = new JLabel("Classificação Indicativa:");
 	private JLabel labelGen = new JLabel("Gênero:");
 	private JTextField valorTitle = new JTextField();
 	private JTextField valorDataLanc = new JTextField();
 	private JTextField valorDuracao = new JTextField();
-	//private JTextField valorLing = new JTextField();
 	private JRadioButton lingDub = new JRadioButton("Dublado");
 	private JRadioButton lingLeg = new JRadioButton("Legendado");
 	//private JTextField valorClassInd = new JTextField();
@@ -31,6 +30,7 @@ public class TelaDetalheFilme implements ActionListener{
 	private JButton butExcluir = new JButton("Excluir");
 	private ButtonGroup radioGroup;
 	private String[] novoDado = new String[10];
+	private String[] valueCL = {"Livre", "10", "12", "14", "16", "18"};
 	private int posicao;
 	private int opcao;
 	Font text = new Font("SansSerif", Font.PLAIN, 18);
@@ -59,7 +59,7 @@ public class TelaDetalheFilme implements ActionListener{
 			valorDuracao.setText(String.valueOf(dados.getFilmes()[posicao].getDuracao()));
 			if(d.getFilmes()[posicao].getLinguagem()=="Dublado") lingDub.setSelected(true);
 			if(d.getFilmes()[posicao].getLinguagem()=="Legendado") lingLeg.setSelected(true);
-			valorClassInd.setSelectedIndex(dados.getFilmes()[posicao].getClassifIndicativa());
+			//valorClassInd.setSelectedIndex(dados.getFilmes()[posicao].getClassifIndicativa());
 			valorGen.setText(dados.getFilmes()[posicao].getGenero());
 			
 			butConclui.setText("Salvar");			
@@ -108,12 +108,7 @@ public class TelaDetalheFilme implements ActionListener{
 			radioGroup.add(lingDub);
 			radioGroup.add(lingLeg);
 			
-			valorClassInd.addItem("Livre");
-			valorClassInd.addItem("10");
-			valorClassInd.addItem("12");
-			valorClassInd.addItem("14");
-			valorClassInd.addItem("16");
-			valorClassInd.addItem("18");
+			preencheComboBox();
 			
 			f.add(butVoltar);
 			f.add(butConclui);
@@ -165,7 +160,7 @@ public class TelaDetalheFilme implements ActionListener{
 		labelDataLanc.setText(labelDataLanc.getText()+" "+dados.getFilmes()[pos].getDataLancamento());
 		labelDuracao.setText(labelDuracao.getText()+" "+dados.getFilmes()[pos].getDuracao());
 		labelLing.setText(labelLing.getText()+" "+dados.getFilmes()[pos].getLinguagem());
-		labelClassInd.setText(labelClassInd.getText()+" "+dados.getFilmes()[pos].getClassifIndicativa());
+		labelClassInd.setText(labelClassInd.getText()+" "+dados.getFilmes()[pos].getValueClassInd());
 		labelGen.setText(labelGen.getText()+" "+dados.getFilmes()[pos].getGenero());
 		
 		butEditar.setBounds(200, 250, 100, 40);
@@ -201,7 +196,7 @@ public class TelaDetalheFilme implements ActionListener{
 			} else if (lingLeg.isSelected()) {
 				novoDado[4] = "Legendado";
 			}
-			//novoDado[5] = valorClassInd.getText();
+			novoDado[5] = retornaValueComboBox();
 			novoDado[6] = valorGen.getText();
 			dados.inserirEditarFilme(novoDado);
 			f.dispose();
@@ -222,6 +217,21 @@ public class TelaDetalheFilme implements ActionListener{
 		}
 	}
 
+	public void preencheComboBox() {
+		for (int i=0; i<6; i++) {
+			valorClassInd.addItem(valueCL[i]);
+		}
+	}
+	public String retornaValueComboBox() {
+		String retorna="0";
+		//if (valorClassInd.getSelectedIndex() == 0) retorna = 0;
+		if (valorClassInd.getSelectedIndex() == 1) retorna = "1";
+		if (valorClassInd.getSelectedIndex() == 2) retorna = "2";
+		if (valorClassInd.getSelectedIndex() == 3) retorna = "3";
+		if (valorClassInd.getSelectedIndex() == 4) retorna = "4";
+		if (valorClassInd.getSelectedIndex() == 5) retorna = "5";
+		return retorna;
+	}
 	
 	/*
 	public static void mudaFonte (Component component, Font font){

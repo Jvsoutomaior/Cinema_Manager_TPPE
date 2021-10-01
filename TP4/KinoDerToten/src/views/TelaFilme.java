@@ -36,7 +36,7 @@ public class TelaFilme implements ActionListener, ListSelectionListener{
 		listaFilmes = new JList<String>(listaTitulos); 
 		
 		f.add(titulo);
-		titulo.setBounds(50,-70,300,250);
+		titulo.setBounds(210,-70,300,250);
 		f.add(listaFilmes);
 		listaFilmes.setBounds(225,100,200,260);
 		f.add(criar);	
