@@ -3,7 +3,7 @@ package models;
 public class Cliente extends Pessoa  {
 	private int fidelidade;
 
-	Cliente(String n, String c, String i, Unidade u, String e, int f){
+	public Cliente(String n, String c, String i, Unidade u, String e, int f){
 		nome = n;
 		cpf = c;
 		dataNasc = i;

@@ -75,7 +75,7 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 		Object src = e.getSource();
 		
 		if(e.getValueIsAdjusting() && src==listaClientes)
-			new TelaDetalheFilme().exibeFilme(dados, listaClientes.getSelectedIndex());
+			new TelaDetalheCliente().exibeCliente(dados, listaClientes.getSelectedIndex());
 	}
 
 
@@ -85,7 +85,7 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 		
 		
 		if(src == criar)
-			new TelaDetalheFilme().adicionaFilme(1, dados);
+			new TelaDetalheCliente().adicionaCliente(1, dados);
 		
 		if(src == atualizar)
 			listaClientes.setListData(new ControleCliente(dados).getNomeCliente());
@@ -107,7 +107,7 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 	public String[] getListaFromSearch() {
 		String[] listaNomesPesquisa = new String[20];
 		
-		for (int i=0; i<5; i++) {
+		for (int i=0; i<dados.getQtdClientes(); i++) {
 			
 			if(pesquisa.getText().compareTo(listaNomes[i])==0) {
 				listaNomesPesquisa[i] = listaNomes[i];

@@ -21,10 +21,10 @@ public abstract class Pessoa {
 		this.cpf = cpf;
 	}
 	public String getDataNasc() {
-		return getDataNasc();
+		return dataNasc;
 	}
 	public void setDataNasc(String dataNasc) {
-		this.dataNasc = getDataNasc();
+		this.dataNasc = dataNasc;
 	}
 	public Unidade getUnidade() {
 		return unidade;

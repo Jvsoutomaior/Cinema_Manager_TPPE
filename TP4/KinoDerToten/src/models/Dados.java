@@ -77,7 +77,7 @@ public class Dados {
 	} 
 	public void inserirEditarSessao(Sessao s, int pos) {
 		this.sessoes[pos] = s;
-		if(pos==qtdSessoes) qtdFilmes++; 
+		if(pos==qtdSessoes) qtdSessoes++; 
 	}
 
 
@@ -93,7 +93,10 @@ public class Dados {
 	public void setQtdClientes(int qtdClientes) {
 		this.qtdClientes = qtdClientes;
 	}
-
+	public void inserirEditarCliente(Cliente c, int pos) {
+		this.clientes[pos] = c;
+		if(pos==qtdClientes) qtdClientes++; 
+	}
 
 	
 	

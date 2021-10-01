@@ -22,7 +22,6 @@ public class TelaDetalheSessao implements ActionListener{
 	private JTextField valorSala = new JTextField();
 	private JRadioButton sim3d = new JRadioButton("3D");
 	private JRadioButton nao3d = new JRadioButton("Normal");
-	private JComboBox<String> valorClassInd = new JComboBox<String>();
 	private JButton butConclui = new JButton();
 	private JButton butEditar = new JButton("Editar");
 	private JButton butVoltar = new JButton("Voltar");
@@ -46,16 +45,16 @@ public class TelaDetalheSessao implements ActionListener{
 		}
 		
 		if (op==2) {
-			labelFilme.setText("Título:");
-			labelHorario.setText("Lancamento:");
-			labelUnidade.setText("Duaração:");
-			labelSala.setText("Linguagem:");
-			label3d.setText("Classificação Indicativa:");
+			labelFilme.setText("Filme:");
+			labelHorario.setText("Horario:");
+			labelUnidade.setText("Unidade:");
+			labelSala.setText("Sala:");
+			label3d.setText("Tipo:");
 			
 			//valorFilme.setSelectedIndex(dados.getSessoes()[posicao].getFilme().getTitulo());
 			valorHorario.setText(dados.getSessoes()[posicao].getHorario());	
 			//valorUnidade.setSelectedIndex(String.valueOf(dados.getFilmes()[posicao].getDuracao()));
-			valorSala.setText(dados.getSessoes()[posicao].getHorario());
+			valorSala.setText(String.valueOf(dados.getSessoes()[posicao].getNumeroSala()));
 			if(d.getSessoes()[posicao].getIs3d()) sim3d.setSelected(true);
 			else nao3d.setSelected(true);
 			
@@ -178,12 +177,11 @@ public class TelaDetalheSessao implements ActionListener{
 			}
 			novoDado[1] = valorFilme.getSelectedItem().toString();
 			novoDado[2] = valorHorario.getText();
-			//novoDado[3] = valorUnidade.getSelectedItem().toString();
-			novoDado[3] = "shopping3";
+			novoDado[3] = valorUnidade.getSelectedItem().toString();
 			novoDado[4] = valorSala.getText();
 			if (sim3d.isSelected()) novoDado[5] ="1";
 			else if (nao3d.isSelected()) novoDado[5] = "0";
-			dados.inserirEditarFilme(novoDado);
+			dados.inserirEditarSessao(novoDado);
 			f.dispose();
 		}
 		
@@ -197,7 +195,7 @@ public class TelaDetalheSessao implements ActionListener{
 		}
 		
 		if(src==butExcluir){
-			dados.removerFilme(posicao);
+			dados.removerSessao(posicao);
 			f.dispose();
 		}
 		
@@ -210,19 +208,5 @@ public class TelaDetalheSessao implements ActionListener{
 		}
 	}
 
-	public String retornaValueComboBox(int alterna) {
-		String retorna="0";
-		
-		if (alterna==1) {
-		} else {
-			//if (valorClassInd.getSelectedIndex() == 0) retorna = 0;
-			if (valorClassInd.getSelectedIndex() == 1) retorna = "1";
-			if (valorClassInd.getSelectedIndex() == 2) retorna = "2";
-			if (valorClassInd.getSelectedIndex() == 3) retorna = "3";
-			if (valorClassInd.getSelectedIndex() == 4) retorna = "4";
-			if (valorClassInd.getSelectedIndex() == 5) retorna = "5";
-		}
-		return retorna;
-	}
-
+	
 }

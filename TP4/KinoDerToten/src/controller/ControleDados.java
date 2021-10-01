@@ -82,12 +82,12 @@ public class ControleDados {
 	
 	public boolean inserirEditarFilme(String[] dadoNovo) {
 		//if(!dadosFilmes[3].matches("[0-9]+") || !dadosFilmes[4].matches("[0-9]+") || 
-				//!dadosFilmes[5].matches("[0-9]+") || !dadosProfs[6].matches("[0-9]+")) {
-		//	return false;
+			//!dadosFilmes[5].matches("[0-9]+") || !dadosProfs[6].matches("[0-9]+")) {
+			//return false;
 	//	} else {
-				Filme f = new Filme(dadoNovo[1], dadoNovo[2], Integer.parseInt(dadoNovo[3]),  dadoNovo[4], Integer.parseInt(dadoNovo[5]), dadoNovo[6]);
-				d.inserirEditarFilme(f, Integer.parseInt(dadoNovo[0]));
-				return true;
+			Filme f = new Filme(dadoNovo[1], dadoNovo[2], Integer.parseInt(dadoNovo[3]),  dadoNovo[4], Integer.parseInt(dadoNovo[5]), dadoNovo[6]);
+			d.inserirEditarFilme(f, Integer.parseInt(dadoNovo[0]));
+			return true;
 		//}
 	}
 
@@ -104,14 +104,37 @@ public class ControleDados {
 	}
 
 	public boolean inserirEditarSessao(String[] dadoNovo) {
-		//if(!dadosFilmes[3].matches("[0-9]+") || !dadosFilmes[4].matches("[0-9]+") || 
-			//!dadosFilmes[5].matches("[0-9]+") || !dadosProfs[6].matches("[0-9]+")) {
-			//return false;
-	//	} else {
-			Sessao sess = new Sessao(getFilmeFromTitulo(dadoNovo[1]), dadoNovo[2], getUnidadeFromShopping(dadoNovo[3]), Integer.parseInt(dadoNovo[4]), retornaBool(dadoNovo[5]));
-			d.inserirEditarSessao(sess, Integer.parseInt(dadoNovo[0]));
-			return true;
-		//}
+		Sessao sess = new Sessao(getFilmeFromTitulo(dadoNovo[1]), dadoNovo[2], getUnidadeFromShopping(dadoNovo[3]), Integer.parseInt(dadoNovo[4]), retornaBool(dadoNovo[5]));
+		d.inserirEditarSessao(sess, Integer.parseInt(dadoNovo[0]));
+		return true;
+	}
+	
+	public boolean removerSessao(int pos) {
+		int i;
+		int qtd = d.getQtdSessoes();
+		
+		for (i = pos; i<qtd-1; i++) {
+			d.getSessoes()[i] = d.getSessoes()[i+1];
+		}
+		d.setQtdSessoes(qtd-1);
+		
+		return true;
 	}
 
+	public boolean inserirEditarCliente(String[] dadoNovo) {
+		Cliente c = new Cliente(dadoNovo[1], dadoNovo[2], dadoNovo[3], getUnidadeFromShopping(dadoNovo[4]), dadoNovo[5], Integer.parseInt(dadoNovo[6]));
+		d.inserirEditarCliente(c, Integer.parseInt(dadoNovo[0]));
+		return true;
+	}
+	public boolean removerCliente(int pos) {
+		int i;
+		int qtd = d.getQtdClientes();
+		
+		for (i = pos; i<qtd-1; i++) {
+			d.getClientes()[i] = d.getClientes()[i+1];
+		}
+		d.setQtdClientes(qtd-1);
+		
+		return true;
+	}
 }
