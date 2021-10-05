@@ -42,6 +42,7 @@ public class TelaDetalheFilme implements ActionListener{
 		opcao = op;
 		f = new JFrame("KDT - Adição de filme");
 		
+		//System.out.println(dados.getFilmes()[posicao].getClassifIndicativa());
 		if (op==1) {
 			butConclui.setText("Adicionar");
 		}
@@ -59,6 +60,7 @@ public class TelaDetalheFilme implements ActionListener{
 			valorDuracao.setText(String.valueOf(dados.getFilmes()[posicao].getDuracao()));
 			if(d.getFilmes()[posicao].getLinguagem()=="Dublado") lingDub.setSelected(true);
 			if(d.getFilmes()[posicao].getLinguagem()=="Legendado") lingLeg.setSelected(true);
+			//valorClassInd.setSelectedItem(valueCL[dados.getFilmes()[posicao].getClassifIndicativa()]);
 			//valorClassInd.setSelectedIndex(dados.getFilmes()[posicao].getClassifIndicativa());
 			valorGen.setText(dados.getFilmes()[posicao].getGenero());
 			

@@ -9,25 +9,36 @@ public class Dados {
 	private int qtdSessoes = 0;
 	private Cliente[] clientes = new Cliente[20];
 	private int qtdClientes = 0;
+	private Funcionario[] funcionarios = new Funcionario[20];
+	private int qtdFuncionarios = 0;
 	
 	
 	public void preencheDataBase() {
 		boolean alterna;
+		String turno;
+		
 		 for (int i=0; i<5; i++) {
 			 int n = i+1;
 			 
-			 if(i%2==0)  alterna = true;
-			 else alterna = false;
+			 if(i%2==0) {
+				 alterna = true;
+				 turno = "Tarde";
+			 } else {
+				 alterna = false; 
+				 turno = "Noite";
+			 }
 			 
 			 filmes[i] = new Filme(("filme"+n), ("0"+n+"/0"+n+"/200"+n), 100+n, "Dublado", i, "Comédia/Drama");
 			 unidades[i] = new Unidade("Bairro"+n, "Quadra"+ n, "Shopping"+n);
 			 sessoes[i] = new Sessao(filmes[i], ("0"+n+":"+n+"0"), unidades[i], n, alterna);
 			 clientes[i] = new Cliente("Cliente"+n, "01230123"+n, ("0"+n+"/0"+n+"/200"+n), unidades[i], n+"@gmail.com", 1);
+			 funcionarios[i] = new Funcionario("Funcionário"+n, "01230123"+n, ("0"+n+"/0"+n+"/200"+n), unidades[i], n+"@gmail.com", turno, "R$100"+n+",00");
 		 }
 		 qtdFilmes = 5;
 		 qtdSessoes = 5;
 		 qtdUnidades = 5;
 		 qtdClientes = 5;
+		 qtdFuncionarios = 5;
 	}
 	
 	
@@ -98,36 +109,32 @@ public class Dados {
 		if(pos==qtdClientes) qtdClientes++; 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-		
-			Scanner ler = new Scanner(System.in);
-		
-			Unidade uni1 = new Unidade("Norte", "Rua 3, Bairro das aves", "Boulevard");
-			Unidade uni2 = new Unidade("Sul", "Rua7, Avenida do Gostares", "Iguatemi");
-			
-			Funcionario func1 = new Funcionario("Jorge", "05648315783", 24, uni1, "jorge@gmail.com", "Tarde", "R$ 1400,00");
-			Funcionario func2 = new Funcionario("Eustácio","65483242975", 72, uni2, "eustacio1984@gmail.com", "Tarde e Noite", "R$ 2100,00");
-			
-			Filme film1 = new Filme("O Grande Hotel Budapeste", ": 3/07/2014", 100, "Legendado", 14, "Comédia/Crime");
-			Filme film2 = new Filme("Baby Driver", "27/06/2017", 115, "Dublado", 14, "Ação/Thriller");		
-			
-			Sessao sess1 = new Sessao(4, film1, "19:30", uni2, false);
-			Sessao sess2 = new Sessao(5, film2, "22:00", uni1, true);
-			
-			Cliente cli1 = new Cliente("André", "65484235128", 19, uni2, "dre@gmail.com", 1);
-			Cliente cli2 = new Cliente("Sérgio","68452257879", 53, uni1, "email@email.com", 3);
-		*/
-	
 
+	public Funcionario[] getFuncionarios() {
+		return funcionarios;
+	}
+	public void setFuncionarios(Funcionario[] funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+	public int getQtdFuncionarios() {
+		return qtdFuncionarios;
+	}
+	public void setQtdFuncionarios(int qtdFuncionarios) {
+		this.qtdFuncionarios = qtdFuncionarios;
+	}
+	public void inserirEditarFuncionario(Funcionario func, int pos) {
+		this.funcionarios[pos] = func;
+		if(pos==qtdFuncionarios) qtdFuncionarios++; 
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

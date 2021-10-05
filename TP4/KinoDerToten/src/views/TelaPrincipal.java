@@ -15,7 +15,7 @@ public class TelaPrincipal implements ActionListener {
 	private static JButton sessao = new JButton("Sessões");
 	private static JButton cliente = new JButton("Fidelidades");
 	private static JButton funcionario = new JButton("Funcionários");
-	private static JLabel descricao = new JLabel("O front end irá mudar na versão final do TP5");
+	private static JLabel descricao = new JLabel("O controle interno da sua franquia de cinemas!");
 	public static ControleDados dados = new ControleDados();
 	
 	public TelaPrincipal() {
@@ -53,6 +53,7 @@ public class TelaPrincipal implements ActionListener {
 		sessao.addActionListener(menu);
 		filme.addActionListener(menu);
 		cliente.addActionListener(menu);
+		funcionario.addActionListener(menu);
 	}
 
 	
@@ -68,10 +69,10 @@ public class TelaPrincipal implements ActionListener {
 		
 		if(src==cliente)
 			new TelaCliente(dados);
-		/*
+		
 		if(src==funcionario)
-			new telaFuncionario();
-			*/
+			new TelaFuncionario(dados);
+			
 		
 	}
 

@@ -4,7 +4,7 @@ public class Funcionario extends Pessoa {
 	protected String turno;
 	protected String salario;
 	
-	Funcionario(String n, String c, String i, Unidade u, String e, String t, String s){
+	public Funcionario(String n, String c, String i, Unidade u, String e, String t, String s){
 		nome = n;
 		cpf = c;
 		dataNasc = i;

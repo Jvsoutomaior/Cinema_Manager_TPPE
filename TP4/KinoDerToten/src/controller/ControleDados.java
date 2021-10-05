@@ -46,6 +46,15 @@ public class ControleDados {
 		return this.d.getQtdClientes();
 	}
 	
+	public Funcionario[] getFuncionarios() {
+		return this.d.getFuncionarios();
+	}
+	public int getQtdFuncionarios() {
+		return this.d.getQtdFuncionarios();
+	}
+	
+	
+	
 	public Filme getFilmeFromTitulo(String s) {
 		//Filme film = ControleDados.getDados().getFilmes()[0];
 		Filme film = d.getFilmes()[0];
@@ -108,7 +117,6 @@ public class ControleDados {
 		d.inserirEditarSessao(sess, Integer.parseInt(dadoNovo[0]));
 		return true;
 	}
-	
 	public boolean removerSessao(int pos) {
 		int i;
 		int qtd = d.getQtdSessoes();
@@ -134,6 +142,23 @@ public class ControleDados {
 			d.getClientes()[i] = d.getClientes()[i+1];
 		}
 		d.setQtdClientes(qtd-1);
+		
+		return true;
+	}
+	
+	public boolean inserirEditarFuncionario(String[] dadoNovo) {
+		Funcionario f = new Funcionario(dadoNovo[1], dadoNovo[2], dadoNovo[3], getUnidadeFromShopping(dadoNovo[4]), dadoNovo[5], dadoNovo[6], dadoNovo[7]);
+		d.inserirEditarFuncionario(f, Integer.parseInt(dadoNovo[0]));
+		return true;
+	}
+	public boolean removerFuncionario(int pos) {
+		int i;
+		int qtd = d.getQtdFuncionarios();
+		
+		for (i = pos; i<qtd-1; i++) {
+			d.getFuncionarios()[i] = d.getFuncionarios()[i+1];
+		}
+		d.setQtdFuncionarios(qtd-1);
 		
 		return true;
 	}

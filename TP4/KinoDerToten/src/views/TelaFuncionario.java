@@ -10,11 +10,11 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class TelaCliente implements ActionListener, ListSelectionListener{
-	private JFrame f = new JFrame("KDT - Clientes e Fidelidades");
-	private JLabel titulo = new JLabel("Clientes cadastrados com Fidelidade");
+public class TelaFuncionario implements ActionListener, ListSelectionListener{
+	private JFrame f = new JFrame("KDT - Funcionários");
+	private JLabel titulo = new JLabel("Nossos Funcionários");
 	private JLabel descr = new JLabel("Selecione da lista para exibir");
-	private JList<String> listaClientes;
+	private JList<String> listaFuncionarios;
 	private String[] listaNomes = new String[20];
 	private JTextField pesquisa = new JTextField();
 	private JButton search = new JButton("Buscar");
@@ -24,7 +24,7 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 	private static ControleDados dados;
 	
 	
-	public TelaCliente(ControleDados d) {
+	public TelaFuncionario(ControleDados d) {
 		dados = d;
 		Font text = new Font("SansSerif", Font.PLAIN, 18);
 		Font title = new Font("SansSerif", Font.BOLD, 22);
@@ -34,13 +34,13 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 		f.setLayout(null);
 		f.setVisible(true);
 		
-		listaNomes = new ControleCliente(dados).getNomeCliente();
-		listaClientes = new JList<String>(listaNomes); 
+		listaNomes = new ControleFuncionario(dados).getNomeFuncionario();
+		listaFuncionarios = new JList<String>(listaNomes); 
 		
 		f.add(titulo);
 		titulo.setBounds(150,0,400,50);
-		f.add(listaClientes);
-		listaClientes.setBounds(225,100,200,260);
+		f.add(listaFuncionarios);
+		listaFuncionarios.setBounds(225,100,200,260);
 		f.add(criar);	
 		criar.setBounds(210,400,100,50);
 		f.add(descr);
@@ -54,17 +54,18 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 		f.add(search);
 		search.setBounds(420,50,75,35);
 		
-		listaClientes.setFont(text);
+		listaFuncionarios.setFont(text);
 		titulo.setFont(title);
 		criar.setFont(but);
 		atualizar.setFont(but);
 		voltar.setFont(but);
 		
-		listaClientes.addListSelectionListener(this);
+		listaFuncionarios.addListSelectionListener(this);
 		criar.addActionListener(this);
 		atualizar.addActionListener(this);
 		voltar.addActionListener(this);
 		search.addActionListener(this);
+		
 	}
 	
 	
@@ -74,8 +75,8 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 	public void valueChanged(ListSelectionEvent e) {
 		Object src = e.getSource();
 		
-		if(e.getValueIsAdjusting() && src==listaClientes)
-			new TelaDetalheCliente().exibeCliente(dados, listaClientes.getSelectedIndex());
+		if(e.getValueIsAdjusting() && src==listaFuncionarios);
+			new TelaDetalheFuncionario().exibeFuncionario(dados, listaFuncionarios.getSelectedIndex());
 	}
 
 
@@ -85,19 +86,19 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 		
 		
 		if(src == criar)
-			new TelaDetalheCliente().adicionaCliente(1, dados);
+			new TelaDetalheFuncionario().adicionaFuncionario(1, dados);
 		
 		if(src == atualizar)
-			listaClientes.setListData(new ControleCliente(dados).getNomeCliente());
-			listaClientes.updateUI();
+			listaFuncionarios.setListData(new ControleFuncionario(dados).getNomeFuncionario());
+			listaFuncionarios.updateUI();
 			
 		if(src == voltar) {
 			f.dispose();
 		}
 		
 		if (src == search) {
-			listaClientes.setListData(getListaFromSearch());
-			listaClientes.updateUI();
+			listaFuncionarios.setListData(getListaFromSearch());
+			listaFuncionarios.updateUI();
 		}
 		
 		
@@ -107,9 +108,9 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 	public String[] getListaFromSearch() {
 		String[] listaNomesPesquisa = new String[20];
 		
-		listaNomes = new ControleCliente(dados).getNomeCliente();
+		listaNomes = new ControleFuncionario(dados).getNomeFuncionario();
 		
-		for (int i=0; i<dados.getQtdClientes(); i++) {
+		for (int i=0; i<dados.getQtdFuncionarios(); i++) {
 			
 			if(pesquisa.getText().compareTo(listaNomes[i])==0) {
 				listaNomesPesquisa[i] = listaNomes[i];
@@ -121,12 +122,12 @@ public class TelaCliente implements ActionListener, ListSelectionListener{
 
 
 
-	public JList<String> getListaClientes() {
-		return listaClientes;
+	public JList<String> getListaFuncionarios() {
+		return listaFuncionarios;
 	}
 
-	public void setListaClientes(JList<String> listaFilmes) {
-		this.listaClientes = listaFilmes;
+	public void setListaFuncionarios(JList<String> listaFilmes) {
+		this.listaFuncionarios = listaFilmes;
 	}
 
 }

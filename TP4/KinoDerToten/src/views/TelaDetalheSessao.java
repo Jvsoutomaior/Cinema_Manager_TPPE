@@ -170,7 +170,7 @@ public class TelaDetalheSessao implements ActionListener{
 		
 		if (src==butConclui) {
 			if (opcao==1) {
-				novoDado[0] = Integer.toString(dados.getQtdFilmes());
+				novoDado[0] = Integer.toString(dados.getQtdSessoes());
 			}
 			if (opcao==2) {
 				novoDado[0] = Integer.toString(posicao);
