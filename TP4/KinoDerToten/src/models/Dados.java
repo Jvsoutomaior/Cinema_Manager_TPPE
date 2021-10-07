@@ -127,6 +127,12 @@ public class Dados {
 		if(pos==qtdFuncionarios) qtdFuncionarios++; 
 	}
 
+
+	public void inserirEditarUnidade(Unidade u, int pos) {
+		this.unidades[pos] = u;
+		if(pos==qtdUnidades) qtdUnidades++; 
+	}
+
 	
 	
 	

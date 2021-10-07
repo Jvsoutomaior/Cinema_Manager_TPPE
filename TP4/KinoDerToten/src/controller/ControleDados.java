@@ -162,4 +162,21 @@ public class ControleDados {
 		
 		return true;
 	}
+
+	public boolean inserirEditarUnidade(String[] dadoNovo) {
+		Unidade u = new Unidade(dadoNovo[1], dadoNovo[2], dadoNovo[3]);
+		d.inserirEditarUnidade(u, Integer.parseInt(dadoNovo[0]));
+		return true;
+	}
+	public boolean removerUnidade(int pos) {
+		int i;
+		int qtd = d.getQtdUnidades();
+		
+		for (i = pos; i<qtd-1; i++) {
+			d.getUnidades()[i] = d.getUnidades()[i+1];
+		}
+		d.setQtdUnidades(qtd-1);
+		
+		return true;
+	}
 }

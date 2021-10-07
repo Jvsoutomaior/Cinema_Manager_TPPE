@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TelaDetalheFuncionario implements ActionListener{
-	private JFrame f = new JFrame();
+	private JFrame f ;
 	//private JPanel p = new JPanel();
 	private JLabel labelNome = new JLabel("Nome:");
 	private JLabel labelCpf = new JLabel("CPF:");
@@ -42,6 +42,8 @@ public class TelaDetalheFuncionario implements ActionListener{
 		opcao = op;
 		f = new JFrame("KDT - Contrato de Funcionario");
 		
+		preencheComboBox();
+		
 		if (op==1) {
 			butConclui.setText("Contratar");
 		}
@@ -58,7 +60,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 			valorNome.setText(dados.getFuncionarios()[posicao].getNome());
 			valorCpf.setText(dados.getFuncionarios()[posicao].getCpf());	
 			valorDataNasc.setText(dados.getFuncionarios()[posicao].getDataNasc());
-			//valorUnidade.setSelectedIndex(dados.getFilmes()[posicao].getClassifIndicativa());			
+			valorUnidade.setSelectedItem(dados.getFuncionarios()[posicao].getUnidade().getShopping());			
 			valorEmail.setText(dados.getFuncionarios()[posicao].getEmail());
 			if(d.getFuncionarios()[posicao].getTurno()=="Tarde") valorTurnoTarde.setSelected(true);
 			if(d.getFuncionarios()[posicao].getTurno()=="Noite") valorTurnoNoite.setSelected(true);
@@ -114,7 +116,6 @@ public class TelaDetalheFuncionario implements ActionListener{
 			radioGroup = new ButtonGroup();
 			radioGroup.add(valorTurnoTarde);
 			radioGroup.add(valorTurnoNoite);
-			preencheComboBox();
 			
 			f.add(butVoltar);
 			f.add(butConclui);
@@ -129,11 +130,11 @@ public class TelaDetalheFuncionario implements ActionListener{
 			butVoltar.addActionListener(this);
 	}
 
-	public void exibeFuncionario(ControleDados d, int pos) {
+	public void exibeFuncionario(ControleDados d/*, int pos*/) {
 		dados = d;
-		posicao = pos;
+		//posicao = pos;
 		
-		f = new JFrame("KDT - Detalhes de Cliente");
+		f = new JFrame("KDT - Detalhes de Funcionario");
 		f.setVisible(true);
 		f.setLayout(null);
 		f.setBounds(550,250, 500, 380);
@@ -164,7 +165,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 		labelEmail.setFont(text);
 		labelTurno.setFont(text);
 		labelSalario.setFont(text);
-		
+		/*
 		labelNome.setText(labelNome.getText()+" "+dados.getFuncionarios()[pos].getNome());
 		labelCpf.setText(labelCpf.getText()+" "+dados.getFuncionarios()[pos].getCpf());
 		labelDataNasc.setText(labelDataNasc.getText()+" "+dados.getFuncionarios()[pos].getDataNasc());
@@ -172,7 +173,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 		labelEmail.setText(labelEmail.getText()+" "+dados.getFuncionarios()[pos].getEmail());
 		labelTurno.setText(labelTurno.getText()+" "+dados.getFuncionarios()[pos].getTurno());
 		labelSalario.setText(labelSalario.getText()+" "+dados.getFuncionarios()[pos].getSalario());
-		
+		*/
 		butEditar.setBounds(200, 280, 100, 40);
 		butVoltar.setBounds(350, 280, 100, 40);
 		butExcluir.setBounds(80, 280, 100, 40);
@@ -209,6 +210,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 				novoDado[6] = "Noite";
 			}
 			novoDado[7] = valorSalario.getText();
+			
 			dados.inserirEditarFuncionario(novoDado);
 			f.dispose();
 		}
@@ -219,7 +221,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 		
 		if (src==butEditar) {
 			f.dispose();
-			adicionaFuncionario(2, dados);	
+			//adicionaFuncionario(2, dados);	
 		}
 		
 		if(src==butExcluir){

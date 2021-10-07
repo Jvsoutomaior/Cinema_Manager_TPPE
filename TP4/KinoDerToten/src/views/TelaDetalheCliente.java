@@ -40,6 +40,8 @@ public class TelaDetalheCliente implements ActionListener{
 		dados = d;
 		opcao = op;
 		f = new JFrame("KDT - Adição de Cliente");
+
+		preencheComboBox();
 		
 		if (op==1) {
 			butConclui.setText("Adicionar");
@@ -56,7 +58,7 @@ public class TelaDetalheCliente implements ActionListener{
 			valorNome.setText(dados.getClientes()[posicao].getNome());
 			valorCpf.setText(dados.getClientes()[posicao].getCpf());	
 			valorDataNasc.setText(dados.getClientes()[posicao].getDataNasc());
-			//valorUnidade.setSelectedIndex(dados.getFilmes()[posicao].getClassifIndicativa());			
+			valorUnidade.setSelectedItem(dados.getClientes()[posicao].getUnidade().getShopping());			
 			valorEmail.setText(dados.getClientes()[posicao].getEmail());
 			if(d.getClientes()[posicao].getFidelidade()==1) valorFide1.setSelected(true);
 			if(d.getClientes()[posicao].getFidelidade()==2) valorFide2.setSelected(true);
@@ -111,7 +113,6 @@ public class TelaDetalheCliente implements ActionListener{
 			radioGroup.add(valorFide2);
 			radioGroup.add(valorFide3);
 			
-			preencheComboBox();
 			
 			f.add(butVoltar);
 			f.add(butConclui);

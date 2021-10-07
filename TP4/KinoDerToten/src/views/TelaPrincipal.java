@@ -15,6 +15,7 @@ public class TelaPrincipal implements ActionListener {
 	private static JButton sessao = new JButton("Sessões");
 	private static JButton cliente = new JButton("Fidelidades");
 	private static JButton funcionario = new JButton("Funcionários");
+	private static JButton unidade = new JButton("Unidades");
 	private static JLabel descricao = new JLabel("O controle interno da sua franquia de cinemas!");
 	public static ControleDados dados = new ControleDados();
 	
@@ -38,6 +39,9 @@ public class TelaPrincipal implements ActionListener {
 		f.add(funcionario);
 		funcionario.setBounds(375, 100, 170, 90);
 		funcionario.setFont(button);
+		f.add(unidade);
+		unidade.setBounds(250, 200, 170, 90);
+		unidade.setFont(button);
 		f.add(titulo);
 		titulo.setBounds(50, -15, 300, 100);
 		titulo.setFont(text);
@@ -54,6 +58,7 @@ public class TelaPrincipal implements ActionListener {
 		filme.addActionListener(menu);
 		cliente.addActionListener(menu);
 		funcionario.addActionListener(menu);
+		unidade.addActionListener(menu);
 	}
 
 	
@@ -73,8 +78,9 @@ public class TelaPrincipal implements ActionListener {
 		if(src==funcionario)
 			new TelaFuncionario(dados);
 			
-		
+		if(src==unidade)
+			new TelaUnidade(dados);
 	}
-
+	
 }
 	

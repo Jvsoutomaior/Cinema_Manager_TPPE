@@ -76,7 +76,7 @@ public class TelaFuncionario implements ActionListener, ListSelectionListener{
 		Object src = e.getSource();
 		
 		if(e.getValueIsAdjusting() && src==listaFuncionarios);
-			new TelaDetalheFuncionario().exibeFuncionario(dados, listaFuncionarios.getSelectedIndex());
+			new TelaDetalheFuncionario().exibeFuncionario(dados/*, listaFuncionarios.getSelectedIndex()*/);
 	}
 
 

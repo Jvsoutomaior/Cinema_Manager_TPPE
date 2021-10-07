@@ -2,7 +2,6 @@ package views;
 
 import javax.swing.*;
 import controller.*;
-import models.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,6 +39,8 @@ public class TelaDetalheSessao implements ActionListener{
 		opcao = op;
 		f = new JFrame("KDT - Criando de Sessão");
 		
+		preencheComboBox();
+		
 		if (op==1) {
 			butConclui.setText("Adicionar");
 		}
@@ -51,9 +52,9 @@ public class TelaDetalheSessao implements ActionListener{
 			labelSala.setText("Sala:");
 			label3d.setText("Tipo:");
 			
-			//valorFilme.setSelectedIndex(dados.getSessoes()[posicao].getFilme().getTitulo());
+			valorFilme.setSelectedItem(dados.getSessoes()[posicao].getFilme().getTitulo());
 			valorHorario.setText(dados.getSessoes()[posicao].getHorario());	
-			//valorUnidade.setSelectedIndex(String.valueOf(dados.getFilmes()[posicao].getDuracao()));
+			valorUnidade.setSelectedItem(dados.getSessoes()[posicao].getUnidade().getShopping());
 			valorSala.setText(String.valueOf(dados.getSessoes()[posicao].getNumeroSala()));
 			if(d.getSessoes()[posicao].getIs3d()) sim3d.setSelected(true);
 			else nao3d.setSelected(true);
@@ -99,7 +100,6 @@ public class TelaDetalheSessao implements ActionListener{
 			radioGroup.add(sim3d);
 			radioGroup.add(nao3d);
 			
-			preencheComboBox();
 			
 			f.add(butVoltar);
 			f.add(butConclui);
