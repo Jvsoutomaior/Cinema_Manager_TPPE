@@ -19,6 +19,9 @@ public class TelaFilme implements ActionListener, ListSelectionListener{
 	private	JButton criar = new JButton("Adicionar"); 
 	private JButton atualizar = new JButton("Atualizar");
 	private JButton voltar = new JButton("Voltar");
+	private static ImageIcon background = new ImageIcon("imgs/KinoDerToten.png");
+	private static ImageIcon icone = new ImageIcon("imgs/icon.png");
+	private static JLabel labelBackground = new JLabel();
 	private static ControleDados dados;
 	
 	
@@ -31,6 +34,8 @@ public class TelaFilme implements ActionListener, ListSelectionListener{
 		f.setBounds(500,200,700,500);
 		f.setLayout(null);
 		f.setVisible(true);
+		f.setResizable(false);
+		f.setIconImage(icone.getImage());
 		
 		listaTitulos = new ControleFilme(dados).getTituloFilme();
 		listaFilmes = new JList<String>(listaTitulos); 

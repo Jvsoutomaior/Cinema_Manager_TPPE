@@ -29,6 +29,9 @@ public class TelaDetalheSessao implements ActionListener{
 	private String[] novoDado = new String[10];
 	private int posicao;
 	private int opcao;
+	private static ImageIcon background = new ImageIcon("imgs/KinoDerToten.png");
+	private static ImageIcon icone = new ImageIcon("imgs/icon.png");
+	private static JLabel labelBackground = new JLabel();
 	Font text = new Font("SansSerif", Font.PLAIN, 18);
 	Font but = new Font("SansSerif", Font.BOLD ,16);
 	private static ControleDados dados;
@@ -38,6 +41,8 @@ public class TelaDetalheSessao implements ActionListener{
 		dados = d;
 		opcao = op;
 		f = new JFrame("KDT - Criando de Sessão");
+		f.setResizable(false);
+		f.setIconImage(icone.getImage());
 		
 		preencheComboBox();
 		
@@ -122,6 +127,8 @@ public class TelaDetalheSessao implements ActionListener{
 		f.setVisible(true);
 		f.setLayout(null);
 		f.setBounds(550,250, 500, 350);
+		f.setResizable(false);
+		f.setIconImage(icone.getImage());
 		
 		f.add(labelFilme);
 		f.add(labelHorario);

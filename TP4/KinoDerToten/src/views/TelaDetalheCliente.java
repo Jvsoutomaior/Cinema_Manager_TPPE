@@ -34,12 +34,16 @@ public class TelaDetalheCliente implements ActionListener{
 	private int opcao;
 	Font text = new Font("SansSerif", Font.PLAIN, 18);
 	Font but = new Font("SansSerif", Font.BOLD ,16);
+	private static ImageIcon background = new ImageIcon("imgs/KinoDerToten3.png");
+	private static ImageIcon icone = new ImageIcon("imgs/icon_cliente.png");
+	private static JLabel labelBackground = new JLabel();
 	private static ControleDados dados;
 	
 	public void adicionaCliente(int op, ControleDados d) {
 		dados = d;
 		opcao = op;
 		f = new JFrame("KDT - Adição de Cliente");
+		f.setIconImage(icone.getImage());
 
 		preencheComboBox();
 		
@@ -135,6 +139,7 @@ public class TelaDetalheCliente implements ActionListener{
 		f.setVisible(true);
 		f.setLayout(null);
 		f.setBounds(550,250, 500, 350);
+		f.setIconImage(icone.getImage());
 		
 		f.add(labelNome);
 		f.add(labelCpf);

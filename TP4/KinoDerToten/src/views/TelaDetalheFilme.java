@@ -33,6 +33,9 @@ public class TelaDetalheFilme implements ActionListener{
 	private String[] valueCL = {"Livre", "10", "12", "14", "16", "18"};
 	private int posicao;
 	private int opcao;
+	private static ImageIcon background = new ImageIcon("imgs/KinoDerToten.png");
+	private static ImageIcon icone = new ImageIcon("imgs/icon.png");
+	private static JLabel labelBackground = new JLabel();
 	Font text = new Font("SansSerif", Font.PLAIN, 18);
 	Font but = new Font("SansSerif", Font.BOLD ,16);
 	private static ControleDados dados;
@@ -70,6 +73,8 @@ public class TelaDetalheFilme implements ActionListener{
 			f.setVisible(true);
 			f.setLayout(null);
 			f.setBounds(550, 250, 500, 350);
+			f.setResizable(false);
+			f.setIconImage(icone.getImage());
 			
 			f.add(labelTitle);
 			f.add(labelDataLanc);
@@ -133,6 +138,8 @@ public class TelaDetalheFilme implements ActionListener{
 		f.setVisible(true);
 		f.setLayout(null);
 		f.setBounds(550,250, 500, 350);
+		f.setResizable(false);
+		f.setIconImage(icone.getImage());
 		
 		f.add(labelTitle);
 		f.add(labelDataLanc);

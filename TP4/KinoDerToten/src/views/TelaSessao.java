@@ -19,7 +19,9 @@ public class TelaSessao implements ActionListener, ListSelectionListener{
 	private JButton atualizar = new JButton("Atualizar");
 	private JButton voltar = new JButton("Voltar");
 	private static ControleDados dados;
-	
+	private static ImageIcon background = new ImageIcon("imgs/KinoDerToten.png");
+	private static ImageIcon icone = new ImageIcon("imgs/icon.png");
+	private static JLabel labelBackground = new JLabel();	
 	Font text = new Font("SansSerif", Font.PLAIN, 18);
 	Font title = new Font("SansSerif", Font.BOLD, 26);
 	Font but = new Font("SansSerif", Font.BOLD ,14);
@@ -31,6 +33,8 @@ public class TelaSessao implements ActionListener, ListSelectionListener{
 		f.setBounds(500,200,700,500);
 		f.setLayout(null);
 		f.setVisible(true);
+		f.setResizable(false);
+		f.setIconImage(icone.getImage());
 		
 		listaDetalhes = new ControleSessao(dados).displaySessaoOnJList();
 		listaSessoes = new JList<String>(listaDetalhes); 

@@ -33,6 +33,9 @@ public class TelaDetalheFuncionario implements ActionListener{
 	private String[] novoDado = new String[10];
 	private int posicao;
 	private int opcao;
+	private static ImageIcon background = new ImageIcon("imgs/KinoDerToten3.png");
+	private static ImageIcon icone = new ImageIcon("imgs/icon_funcionario.png");
+	private static JLabel labelBackground = new JLabel();
 	private static ControleDados dados;
 	Font text = new Font("SansSerif", Font.PLAIN, 18);
 	Font but = new Font("SansSerif", Font.BOLD ,16);
@@ -41,6 +44,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 		dados = d;
 		opcao = op;
 		f = new JFrame("KDT - Contrato de Funcionario");
+		f.setIconImage(icone.getImage());
 		
 		preencheComboBox();
 		
@@ -130,14 +134,15 @@ public class TelaDetalheFuncionario implements ActionListener{
 			butVoltar.addActionListener(this);
 	}
 
-	public void exibeFuncionario(ControleDados d/*, int pos*/) {
+	public void exibeFuncionario(ControleDados d, int pos) {
 		dados = d;
-		//posicao = pos;
+		posicao = pos;
 		
 		f = new JFrame("KDT - Detalhes de Funcionario");
 		f.setVisible(true);
 		f.setLayout(null);
 		f.setBounds(550,250, 500, 380);
+		f.setIconImage(icone.getImage());
 		
 		f.add(labelNome);
 		f.add(labelCpf);
@@ -165,7 +170,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 		labelEmail.setFont(text);
 		labelTurno.setFont(text);
 		labelSalario.setFont(text);
-		/*
+		
 		labelNome.setText(labelNome.getText()+" "+dados.getFuncionarios()[pos].getNome());
 		labelCpf.setText(labelCpf.getText()+" "+dados.getFuncionarios()[pos].getCpf());
 		labelDataNasc.setText(labelDataNasc.getText()+" "+dados.getFuncionarios()[pos].getDataNasc());
@@ -173,7 +178,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 		labelEmail.setText(labelEmail.getText()+" "+dados.getFuncionarios()[pos].getEmail());
 		labelTurno.setText(labelTurno.getText()+" "+dados.getFuncionarios()[pos].getTurno());
 		labelSalario.setText(labelSalario.getText()+" "+dados.getFuncionarios()[pos].getSalario());
-		*/
+		
 		butEditar.setBounds(200, 280, 100, 40);
 		butVoltar.setBounds(350, 280, 100, 40);
 		butExcluir.setBounds(80, 280, 100, 40);
@@ -221,7 +226,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 		
 		if (src==butEditar) {
 			f.dispose();
-			//adicionaFuncionario(2, dados);	
+			adicionaFuncionario(2, dados);	
 		}
 		
 		if(src==butExcluir){
