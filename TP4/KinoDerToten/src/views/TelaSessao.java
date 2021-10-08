@@ -3,6 +3,9 @@ package views;
 import javax.swing.*;
 import controller.*;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +34,7 @@ public class TelaSessao implements ActionListener, ListSelectionListener{
 		dados = d;
 		
 		f.setBounds(500,200,700,500);
-		f.setLayout(null);
+		f.setLayout(new BorderLayout());
 		f.setVisible(true);
 		f.setResizable(false);
 		f.setIconImage(icone.getImage());
@@ -52,6 +55,13 @@ public class TelaSessao implements ActionListener, ListSelectionListener{
 		f.add(voltar);
 		voltar.setBounds(500, 400, 100, 50);
 		
+		f.setIconImage(icone.getImage());
+		
+		titulo.setForeground(Color.white);
+		
+		labelBackground.setIcon(background);
+		f.add(labelBackground, BorderLayout.CENTER);		
+		labelBackground.setPreferredSize(new Dimension(700,500));
 		
 		listaSessoes.setFont(text);
 		titulo.setFont(title);

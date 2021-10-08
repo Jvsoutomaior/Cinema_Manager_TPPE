@@ -21,5 +21,4 @@ public class ControleCliente {
 		return s;
 	}
 	
-	
 }

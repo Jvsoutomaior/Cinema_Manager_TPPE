@@ -90,19 +90,26 @@ public class ControleDados {
 	}
 	
 	public boolean inserirEditarFilme(String[] dadoNovo) {
-		//if(!dadosFilmes[3].matches("[0-9]+") || !dadosFilmes[4].matches("[0-9]+") || 
-			//!dadosFilmes[5].matches("[0-9]+") || !dadosProfs[6].matches("[0-9]+")) {
-			//return false;
-	//	} else {
+		if(!dadoNovo[3].matches("[0-9]+") || !dadoNovo[5].matches("[0-9]+")) {
+			return false;
+		} else {
 			Filme f = new Filme(dadoNovo[1], dadoNovo[2], Integer.parseInt(dadoNovo[3]),  dadoNovo[4], Integer.parseInt(dadoNovo[5]), dadoNovo[6]);
 			d.inserirEditarFilme(f, Integer.parseInt(dadoNovo[0]));
 			return true;
-		//}
+		}
 	}
 
 	public boolean removerFilme(int pos) {
-		int i;
+		int i, j;
 		int qtd = d.getQtdFilmes();
+		String aux;
+		String filmeRemovido = d.getFilmes()[pos].getTitulo();
+		
+		for(j=0; j < getQtdSessoes(); j++) {
+			aux = d.getSessoes()[j].getFilme().getTitulo();
+			if (filmeRemovido.compareTo(aux)==0)
+				return false;
+		}
 		
 		for (i = pos; i<qtd-1; i++) {
 			d.getFilmes()[i] = d.getFilmes()[i+1];
@@ -130,9 +137,13 @@ public class ControleDados {
 	}
 
 	public boolean inserirEditarCliente(String[] dadoNovo) {
-		Cliente c = new Cliente(dadoNovo[1], dadoNovo[2], dadoNovo[3], getUnidadeFromShopping(dadoNovo[4]), dadoNovo[5], Integer.parseInt(dadoNovo[6]));
-		d.inserirEditarCliente(c, Integer.parseInt(dadoNovo[0]));
-		return true;
+		if(!dadoNovo[6].matches("[0-9]+")) {
+			return false;
+		} else {
+			Cliente c = new Cliente(dadoNovo[1], dadoNovo[2], dadoNovo[3], getUnidadeFromShopping(dadoNovo[4]), dadoNovo[5], Integer.parseInt(dadoNovo[6]));
+			d.inserirEditarCliente(c, Integer.parseInt(dadoNovo[0]));
+			return true;
+		}
 	}
 	public boolean removerCliente(int pos) {
 		int i;
@@ -169,8 +180,26 @@ public class ControleDados {
 		return true;
 	}
 	public boolean removerUnidade(int pos) {
-		int i;
+		int i, j;
 		int qtd = d.getQtdUnidades();
+		String aux;
+		String unidadeRemovida = d.getUnidades()[pos].getShopping();
+		
+		for(j=0; j < getQtdSessoes(); j++) {
+			aux = d.getSessoes()[j].getUnidade().getShopping();
+			if (unidadeRemovida.compareTo(aux)==0)
+				return false;
+		}
+		for(j=0; j < getQtdClientes(); j++) {
+			aux = d.getClientes()[j].getUnidade().getShopping();
+			if (unidadeRemovida.compareTo(aux)==0)
+				return false;
+		}
+		for(j=0; j < getQtdFuncionarios(); j++) {
+			aux = d.getFuncionarios()[j].getUnidade().getShopping();
+			if (unidadeRemovida.compareTo(aux)==0)
+				return false;
+		}
 		
 		for (i = pos; i<qtd-1; i++) {
 			d.getUnidades()[i] = d.getUnidades()[i+1];
@@ -179,4 +208,5 @@ public class ControleDados {
 		
 		return true;
 	}
+
 }

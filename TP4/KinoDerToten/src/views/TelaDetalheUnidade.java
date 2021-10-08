@@ -49,6 +49,7 @@ public class TelaDetalheUnidade implements ActionListener{
 			f.setVisible(true);
 			f.setLayout(null);
 			f.setBounds(550, 250, 500, 350);
+			f.setResizable(false);
 			
 			f.add(labelRegiao);
 			f.add(labelEndereco);
@@ -90,6 +91,7 @@ public class TelaDetalheUnidade implements ActionListener{
 		f.setVisible(true);
 		f.setLayout(null);
 		f.setBounds(550,250, 500, 350);
+		f.setResizable(false);
 		
 		f.add(labelRegiao);
 		f.add(labelEndereco);
@@ -128,18 +130,36 @@ public class TelaDetalheUnidade implements ActionListener{
 		Object src = e.getSource();
 		
 		if (src==butConclui) {
-			if (opcao==1) {
-				novoDado[0] = Integer.toString(dados.getQtdFilmes());
+			try {
+				boolean res;
+				
+				if (valorShopping.getText().isEmpty()) {
+					res = false;
+				} else {
+					if (opcao==1) {
+						novoDado[0] = Integer.toString(dados.getQtdFilmes());
+					}
+					if (opcao==2) {
+						novoDado[0] = Integer.toString(posicao);
+					}
+					novoDado[1] = valorRegiao.getText();
+					novoDado[2] = valorEndereco.getText();
+					novoDado[3] = valorShopping.getText();
+					
+					res = dados.inserirEditarUnidade(novoDado);
+					f.dispose();
+				}
+
+				if (res) {
+					mensagemSucesso();
+				} else {
+					mensagemErro();
+				}
+				
+			} catch (NullPointerException exc1) {
+				mensagemErro();
 			}
-			if (opcao==2) {
-				novoDado[0] = Integer.toString(posicao);
-			}
-			novoDado[1] = valorRegiao.getText();
-			novoDado[2] = valorEndereco.getText();
-			novoDado[3] = valorShopping.getText();
 			
-			dados.inserirEditarUnidade(novoDado);
-			f.dispose();
 		}
 		
 		if (src==butVoltar) {
@@ -152,9 +172,36 @@ public class TelaDetalheUnidade implements ActionListener{
 		}
 		
 		if(src==butExcluir){
-			dados.removerUnidade(posicao);
+			boolean res = false;
+			
+			res = dados.removerUnidade(posicao);
+			if(res) mensagemSucessoRemove();
+			else mensagemErroRemove();
 			f.dispose();
 		}
 	}
 
+	
+	public void mensagemSucesso() {
+		if(opcao==1) {
+			JOptionPane.showMessageDialog(null, "SUCESSO\nUnidade adicionada!", null, JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "SUCESSO\nUnidade atualizada!", null, JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	public void mensagemErro() {
+		JOptionPane.showMessageDialog(null, "ERRO\nCertifique-se de:\n-Preencher todos os Campos.\n-O valor da Duração deve ser um número.", null, JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void mensagemSucessoRemove() {
+		JOptionPane.showMessageDialog(null, "Unidade removido com sucesso.", null, JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void mensagemErroRemove() {
+		JOptionPane.showMessageDialog(null, "ERRO\nA Unidade não pode ser removido pois está cadastrado em alguma(s) sessão\nEdite essa sessão primeiro", null, JOptionPane.ERROR_MESSAGE);
+	}
+	
+	
+	
 }

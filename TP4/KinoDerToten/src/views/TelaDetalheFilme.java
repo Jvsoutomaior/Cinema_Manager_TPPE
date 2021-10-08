@@ -191,24 +191,43 @@ public class TelaDetalheFilme implements ActionListener{
 		Object src = e.getSource();
 		
 		if (src==butConclui) {
-			if (opcao==1) {
-				novoDado[0] = Integer.toString(dados.getQtdFilmes());
+			try {
+				boolean res;
+
+				if(valorTitle.getText().isEmpty()) {
+					res = false;
+				} else {
+					if (opcao==1) {
+						novoDado[0] = Integer.toString(dados.getQtdFilmes());
+					}
+					if (opcao==2) {
+						novoDado[0] = Integer.toString(posicao);
+					}
+					novoDado[1] = valorTitle.getText();
+					novoDado[2] = valorDataLanc.getText();
+					novoDado[3] = valorDuracao.getText();
+					if(lingDub.isSelected()) {
+						novoDado[4] = "Dublado";
+					} else if (lingLeg.isSelected()) {
+						novoDado[4] = "Legendado";
+					}
+					novoDado[5] = retornaValueComboBox();
+					novoDado[6] = valorGen.getText();
+					
+					res = dados.inserirEditarFilme(novoDado);
+					f.dispose();
+				}
+			
+				if (res) {
+					mensagemSucesso();
+				} else {
+					mensagemErro();
+				}
+			
+			} catch (NullPointerException exc1) {
+				mensagemErro();
 			}
-			if (opcao==2) {
-				novoDado[0] = Integer.toString(posicao);
-			}
-			novoDado[1] = valorTitle.getText();
-			novoDado[2] = valorDataLanc.getText();
-			novoDado[3] = valorDuracao.getText();
-			if(lingDub.isSelected()) {
-				novoDado[4] = "Dublado";
-			} else if (lingLeg.isSelected()) {
-				novoDado[4] = "Legendado";
-			}
-			novoDado[5] = retornaValueComboBox();
-			novoDado[6] = valorGen.getText();
-			dados.inserirEditarFilme(novoDado);
-			f.dispose();
+			
 		}
 		
 		if (src==butVoltar) {
@@ -221,7 +240,11 @@ public class TelaDetalheFilme implements ActionListener{
 		}
 		
 		if(src==butExcluir){
-			dados.removerFilme(posicao);
+			boolean res = false;
+			
+			res = dados.removerFilme(posicao);
+			if(res) mensagemSucessoRemove();
+			else mensagemErroRemove();
 			f.dispose();
 		}
 	}
@@ -241,6 +264,29 @@ public class TelaDetalheFilme implements ActionListener{
 		if (valorClassInd.getSelectedIndex() == 5) retorna = "5";
 		return retorna;
 	}
+	
+	public void mensagemSucesso() {
+		if (opcao==1) {
+			JOptionPane.showMessageDialog(null, "SUCESSO\nFilme adicionado!", null, JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "SUCESSO\nFilme atualizado!", null, JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	public void mensagemErro() {
+		JOptionPane.showMessageDialog(null, "ERRO\nCertifique-se de:\n-Preencher todos os Campos.\n-O valor da Duração deve ser um número.", null, JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void mensagemSucessoRemove() {
+		JOptionPane.showMessageDialog(null, "Filme removido com sucesso.", null, JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void mensagemErroRemove() {
+		JOptionPane.showMessageDialog(null, "ERRO\nO Filme não pode ser removido pois está cadastrado em alguma(s) sessão\nEdite essa sessão primeiro", null, JOptionPane.ERROR_MESSAGE);
+	}
+	
+	
+	
 	
 	/*
 	public static void mudaFonte (Component component, Font font){

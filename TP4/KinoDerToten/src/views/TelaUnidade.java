@@ -3,6 +3,9 @@ package views;
 import javax.swing.*;
 import controller.*;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,13 +15,16 @@ import javax.swing.event.ListSelectionListener;
 
 public class TelaUnidade implements ActionListener, ListSelectionListener{
 	private JFrame f = new JFrame("KDT - Unidades");
-	private JLabel titulo = new JLabel("Filmes em Cartaz:");
+	private JLabel titulo = new JLabel("Nossas unidades:");
 	private JLabel descr = new JLabel("Selecione da lista para exibir");
 	private JList<String> listaUnidades;
 	private String[] listaShoppings = new String[20];
 	private	JButton criar = new JButton("Adicionar"); 
 	private JButton atualizar = new JButton("Atualizar");
 	private JButton voltar = new JButton("Voltar");
+	private static ImageIcon background = new ImageIcon("imgs/KinoDerToten.png");
+	private static ImageIcon icone = new ImageIcon("imgs/icon.png");
+	private static JLabel labelBackground = new JLabel();
 	private static ControleDados dados;
 	
 	
@@ -29,8 +35,9 @@ public class TelaUnidade implements ActionListener, ListSelectionListener{
 		Font but = new Font("SansSerif", Font.BOLD ,14);
 		
 		f.setBounds(500,200,700,500);
-		f.setLayout(null);
+		f.setLayout(new BorderLayout());
 		f.setVisible(true);
+		f.setResizable(false);
 		
 		listaShoppings = new ControleUnidade(dados).getShoppingUnidade();
 		listaUnidades = new JList<String>(listaShoppings); 
@@ -47,6 +54,15 @@ public class TelaUnidade implements ActionListener, ListSelectionListener{
 		atualizar.setBounds(320,400,100,50);
 		f.add(voltar);
 		voltar.setBounds(500, 400, 100, 50);
+		
+		f.setIconImage(icone.getImage());
+		
+		titulo.setForeground(Color.white);
+		descr.setForeground(Color.white);
+		
+		labelBackground.setIcon(background);
+		f.add(labelBackground, BorderLayout.CENTER);		
+		labelBackground.setPreferredSize(new Dimension(700,500));
 		
 		listaUnidades.setFont(text);
 		titulo.setFont(title);

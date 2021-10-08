@@ -191,28 +191,45 @@ public class TelaDetalheCliente implements ActionListener{
 		Object src = e.getSource();
 		
 		if (src==butConclui) {
-			if (opcao==1) {
-				novoDado[0] = Integer.toString(dados.getQtdClientes());
+			try {
+				boolean res;
+				
+				if (valorNome.getText().isEmpty()) {
+					res = false;
+				} else {
+					if (opcao==1) {
+						novoDado[0] = Integer.toString(dados.getQtdClientes());
+					}
+					if (opcao==2) {
+						novoDado[0] = Integer.toString(posicao);
+					}
+					novoDado[1] = valorNome.getText();
+					novoDado[2] = valorCpf.getText();
+					novoDado[3] = valorDataNasc.getText();
+					novoDado[4] = valorUnidade.getSelectedItem().toString();
+					novoDado[5] = valorEmail.getText();
+					if(valorFide1.isSelected()) {
+						novoDado[6] = "1";
+					} else if (valorFide2.isSelected()) {
+						novoDado[6] = "2";
+					}
+					else if (valorFide3.isSelected()) {
+						novoDado[6] = "3";
+					}
+					
+					res = dados.inserirEditarCliente(novoDado);
+					f.dispose();
 			}
-			if (opcao==2) {
-				novoDado[0] = Integer.toString(posicao);
+				
+				if (res) {
+					mensagemSucesso();
+				} else {
+					mensagemErro();
+				}
+				
+			} catch (NullPointerException exc1) {
+				mensagemErro();
 			}
-			novoDado[1] = valorNome.getText();
-			novoDado[2] = valorCpf.getText();
-			novoDado[3] = valorDataNasc.getText();
-			novoDado[4] = valorUnidade.getSelectedItem().toString();
-			novoDado[5] = valorEmail.getText();
-			if(valorFide1.isSelected()) {
-				novoDado[6] = "1";
-			} else if (valorFide2.isSelected()) {
-				novoDado[6] = "2";
-			}
-			else if (valorFide3.isSelected()) {
-				novoDado[6] = "3";
-			}
-			
-			dados.inserirEditarCliente(novoDado);
-			f.dispose();
 		}
 		
 		if (src==butVoltar) {
@@ -236,4 +253,15 @@ public class TelaDetalheCliente implements ActionListener{
 		}
 	}
 	
+	public void mensagemSucesso() {
+		if (opcao==1) {
+			JOptionPane.showMessageDialog(null, "SUCESSO\nCliente Cadastrado!", null, JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "SUCESSO\nCliente Atualizado!", null, JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	public void mensagemErro() {
+		JOptionPane.showMessageDialog(null, "ERRO\nCertifique-se de:\n-Preencher todos os Campos essenciais.", null, JOptionPane.ERROR_MESSAGE);
+	}
 }

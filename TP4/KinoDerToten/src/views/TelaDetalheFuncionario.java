@@ -198,26 +198,31 @@ public class TelaDetalheFuncionario implements ActionListener{
 		Object src = e.getSource();
 		
 		if (src==butConclui) {
-			if (opcao==1) {
-				novoDado[0] = Integer.toString(dados.getQtdFuncionarios());
+			if(valorNome.getText().isEmpty()) {
+				mensagemErro();
+			} else {
+				if (opcao==1) {
+					novoDado[0] = Integer.toString(dados.getQtdFuncionarios());
+				}
+				if (opcao==2) {
+					novoDado[0] = Integer.toString(posicao);
+				}
+				novoDado[1] = valorNome.getText();
+				novoDado[2] = valorCpf.getText();
+				novoDado[3] = valorDataNasc.getText();
+				novoDado[4] = valorUnidade.getSelectedItem().toString();
+				novoDado[5] = valorEmail.getText();
+				if(valorTurnoTarde.isSelected()) {
+					novoDado[6] = "Tarde";
+				} else if (valorTurnoNoite.isSelected()) {
+					novoDado[6] = "Noite";
+				}
+				novoDado[7] = valorSalario.getText();
+				
+				dados.inserirEditarFuncionario(novoDado);
+				mensagemSucesso();
+				f.dispose();
 			}
-			if (opcao==2) {
-				novoDado[0] = Integer.toString(posicao);
-			}
-			novoDado[1] = valorNome.getText();
-			novoDado[2] = valorCpf.getText();
-			novoDado[3] = valorDataNasc.getText();
-			novoDado[4] = valorUnidade.getSelectedItem().toString();
-			novoDado[5] = valorEmail.getText();
-			if(valorTurnoTarde.isSelected()) {
-				novoDado[6] = "Tarde";
-			} else if (valorTurnoNoite.isSelected()) {
-				novoDado[6] = "Noite";
-			}
-			novoDado[7] = valorSalario.getText();
-			
-			dados.inserirEditarFuncionario(novoDado);
-			f.dispose();
 		}
 		
 		if (src==butVoltar) {
@@ -233,6 +238,17 @@ public class TelaDetalheFuncionario implements ActionListener{
 			dados.removerFuncionario(posicao);
 			f.dispose();
 		}
+	}
+	
+	public void mensagemSucesso() {
+		if (opcao==1) {
+			JOptionPane.showMessageDialog(null, "SUCESSO\nFuncionário contratado!", null, JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "SUCESSO\nFuncionário atualizado", null, JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	public void mensagemErro(){
+		JOptionPane.showMessageDialog(null, "ERRO\nCertifique-se de Preencher todos os Campos.", null, JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void preencheComboBox() {
