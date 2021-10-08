@@ -209,9 +209,11 @@ public class TelaDetalheSessao implements ActionListener{
 	}
 	
 	public void preencheComboBox() {
-		for (int i=0; i<5; i++) { 
+		for (int i=0; i<dados.getQtdFilmes(); i++) { 
 			valorFilme.addItem(dados.getFilmes()[i].getTitulo());
-			valorUnidade.addItem(dados.getUnidades()[i].getShopping());
+		}
+		for(int j=0; j<dados.getQtdUnidades();j++) {
+			valorUnidade.addItem(dados.getUnidades()[j].getShopping());
 		}
 	}
 

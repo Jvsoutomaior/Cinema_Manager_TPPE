@@ -252,7 +252,7 @@ public class TelaDetalheFuncionario implements ActionListener{
 	}
 
 	public void preencheComboBox() {
-		for (int i=0; i<5; i++) {
+		for (int i=0; i<dados.getQtdUnidades(); i++) {
 			valorUnidade.addItem(dados.getUnidades()[i].getShopping());
 		}
 	}

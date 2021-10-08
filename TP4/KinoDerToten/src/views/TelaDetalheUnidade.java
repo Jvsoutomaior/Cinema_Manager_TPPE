@@ -137,7 +137,7 @@ public class TelaDetalheUnidade implements ActionListener{
 					res = false;
 				} else {
 					if (opcao==1) {
-						novoDado[0] = Integer.toString(dados.getQtdFilmes());
+						novoDado[0] = Integer.toString(dados.getQtdUnidades());
 					}
 					if (opcao==2) {
 						novoDado[0] = Integer.toString(posicao);
