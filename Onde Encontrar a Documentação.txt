@@ -1,3 +1,0 @@
-A documentação do meu código está dentro da pasta:
-
-TP5 > KinoDerToten > doc
