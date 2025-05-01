@@ -1,35 +1,45 @@
 # requirements to run this project
 
-* [uv](https://docs.astral.sh/uv/) for Python package and environment management.
+## local
 
-Fist install uv
+requirements:
+[uv](https://docs.astral.sh/uv/) for Python package and environment management.
 
-Then install python3.13.3 using uv:
+
+- install python3.12 using uv:
 ```bash
-uv python install cpython-3.13.3-linux-x86_64-gnu
+uv python install cpython-3.12-linux-x86_64-gnu
 ```
 
-Then create and activate virtual environment:
+- create virtual environment:
 ```bash
 uv venv
 ```
 
+- activate virtual environment:
 ```bash
 source .venv/bin/activate
 ```
 
-Then install dependencies:
+- install dependencies:
 ```bash
 uv sync
 ```
 
-Then run the project:
+- run the project:
 ```bash
-cd app
-uvicorn main:app
+fastapi dev
 ```
 
-to run tests:
+## docker
+requirements:
+- docker
+
+```
+docker build -t app .
+```
+
+Then run the project:
 ```bash
-pytest
+docker run -p 8000:8000 app
 ```
