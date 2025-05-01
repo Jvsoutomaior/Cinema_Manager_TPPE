@@ -1,3 +1,13 @@
 .venv
+__pycache__
 documentos
 README.md
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# git
+.gitignore
+.git

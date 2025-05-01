@@ -1,5 +1,4 @@
 services:
-  
   app:
     build:
       context: .
@@ -12,6 +11,8 @@ services:
   database:
     image: postgres
     environment:
+      POSTGRES_DB: MyDatabase
+      POSTGRES_USER: admin
       POSTGRES_PASSWORD : password
     ports:
       - 5432:5432
