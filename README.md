@@ -43,3 +43,14 @@ Then run the project:
 ```bash
 docker run -p 8000:8000 app
 ```
+
+## docker-compose
+requirements:
+- docker
+- docker-compose
+
+```bash
+docker-compose up
+```
+Access
+http://localhost:15432
