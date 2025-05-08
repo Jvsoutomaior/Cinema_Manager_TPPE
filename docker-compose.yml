@@ -32,6 +32,19 @@ services:
       - database
     networks:
       - postgres-network
+    
+  testing:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    depends_on:
+      - app
+    networks:
+      - postgres-network
+    environment: # needs this to connect to the database
+      POSTGRES_DB: MyDatabase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
 
 networks: 
   postgres-network:
