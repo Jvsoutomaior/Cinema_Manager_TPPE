@@ -11,6 +11,7 @@ class Unidade(Base):
     email = Column(String, nullable=True)
     rede = Column(String, nullable=True)
     sessoes = relationship("Sessao", back_populates="unidade")
+    pessoas = relationship("Pessoa", back_populates="unidade")
 
 class Filme(Base):
     __tablename__ = "filmes"
@@ -49,6 +50,8 @@ class Pessoa(Base):
     data_nascimento = Column(Date, nullable=True)
     email = Column(String, nullable=True)
     tipo = Column(String)
+    unidade_id_FK = Column(Integer, ForeignKey("unidades.id"))
+    unidade = relationship("Unidade", back_populates="pessoas")
     __mapper_args__ = {"polymorphic_identity": "pessoa", "polymorphic_on": tipo}
 
 class Funcionario(Pessoa):
