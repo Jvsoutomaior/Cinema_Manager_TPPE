@@ -1,14 +1,13 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.database import SessionLocal, init_db
-from app.models import User
+from .database import engine, Base, SessionLocal, init_db
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import router
-from .database import engine, Base
+from .routers import cinema, filme, ingresso, pessoa, sessao
 
 app = FastAPI(
-    title="Cinema API",
-    description="API for managing a cinema system",
+    title="Cinema Manager API",
+    description="API for managing cinemas, movies, sessions, and tickets",
     version="1.0.0"
 )
 
@@ -35,14 +34,13 @@ init_db()
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
-# Include router
-app.include_router(router, prefix="/api/v1")
+# Include all routers
+app.include_router(cinema.router, prefix="/cinemas", tags=["cinemas"])
+app.include_router(filme.router, prefix="/filmes", tags=["filmes"])
+app.include_router(ingresso.router, prefix="/ingressos", tags=["ingressos"])
+app.include_router(pessoa.router, prefix="/pessoas", tags=["pessoas"])
+app.include_router(sessao.router, prefix="/sessoes", tags=["sessoes"])
 
-@app.get("/health")
-def orm_health_check(db: Session = Depends(get_db)):
-    try:
-        # Check if we can query the User table
-        users = db.query(User).limit(1).all()
-        return {"status": "ok", "user_count": len(users)}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"DB Error: {e}")
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Cinema Manager API"}
