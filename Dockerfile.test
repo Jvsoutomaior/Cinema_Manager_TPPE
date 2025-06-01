@@ -1,8 +1,8 @@
 # Use a Python image with uv pre-installed
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
-# Install the project into `/app`
-WORKDIR /app
+# Install the project into `/testing`
+WORKDIR /testing
 
 # Enable bytecode compilation
 ENV UV_COMPILE_BYTECODE=1
@@ -17,17 +17,18 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --group test
 
 # Then, add the rest of the project source code
-ADD . /app
+# Installing separately from its dependencies allows optimal layer caching
+ADD . /testing
+
+
 
 # Place executables in the environment at the front of the path
-ENV PATH="/app/.venv/bin:$PATH"
+ENV PATH="/testing/.venv/bin:$PATH"
 
 # Reset the entrypoint, don't invoke `uv`
 ENTRYPOINT []
 
-RUN ls /app/.venv/bin
-
-
 # Default command to run tests
 # CMD ["pytest", "--maxfail=1", "--disable-warnings", "-v"]
+
 CMD ["pytest", "./tests/tests_main.py"]
