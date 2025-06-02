@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List, Optional, ForwardRef
 
 class CinemaBase(BaseModel):
@@ -12,10 +12,9 @@ class CinemaCreate(CinemaBase):
 
 class Cinema(CinemaBase):
     id: int
-    sessoes: List["Sessao"] = []
-
-    class Config:
-        from_attributes = True
+    # sessoes: List["Sessao"] = []
+    # pessoas: List["Pessoa"] = []
+    # model_config = ConfigDict(from_attributes=True)
 
 class CinemaUpdate(BaseModel):
     nome: Optional[str] = None
@@ -23,5 +22,3 @@ class CinemaUpdate(BaseModel):
     telefone: Optional[str] = None
     email: Optional[str] = None
 
-# Forward reference
-Sessao = ForwardRef("Sessao") 

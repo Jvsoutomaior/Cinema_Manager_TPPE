@@ -1,7 +1,9 @@
-from pydantic import BaseModel
-from typing import Optional
-from .sessao import Sessao
-from .pessoa import Cliente
+from pydantic import BaseModel, ConfigDict
+from typing import Optional, TYPE_CHECKING
+
+# if TYPE_CHECKING:
+#     from .sessao import Sessao
+#     from .pessoa import Cliente
 
 class IngressoBase(BaseModel):
     preco: float
@@ -14,14 +16,12 @@ class IngressoCreate(IngressoBase):
 
 class Ingresso(IngressoBase):
     id: int
-    sessao: Optional[Sessao] = None
-    clientes: Optional[Cliente] = None
-
-    class Config:
-        from_attributes = True
+    # sessao: Optional["Sessao"] = None
+    # clientes: Optional["Cliente"] = None
+    model_config = ConfigDict(from_attributes=True)
 
 class IngressoUpdate(BaseModel):
     preco: Optional[float] = None
     tipo: Optional[str] = None
     sessao_id_FK: Optional[int] = None
-    cliente_cpf_FK: Optional[str] = None 
+    cliente_cpf_FK: Optional[str] = None

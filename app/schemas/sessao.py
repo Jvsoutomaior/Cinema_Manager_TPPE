@@ -1,9 +1,13 @@
-from pydantic import BaseModel
-from typing import List, Optional, ForwardRef
+from pydantic import BaseModel, ConfigDict
+from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 
+#if TYPE_CHECKING:
+#    from .filme import Filme
+#    from .cinema import Cinema
+
 class DataHorarioBase(BaseModel):
-    dataHora: datetime
+    data: datetime
     sessao_id_FK: int
 
 class DataHorarioCreate(DataHorarioBase):
@@ -11,10 +15,7 @@ class DataHorarioCreate(DataHorarioBase):
 
 class DataHorario(DataHorarioBase):
     id: int
-    sessao: Optional["Sessao"] = None
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class SessaoBase(BaseModel):
     linguagem: Optional[str] = None
@@ -28,12 +29,10 @@ class SessaoCreate(SessaoBase):
 
 class Sessao(SessaoBase):
     id: int
-    cinema: Optional["Cinema"] = None
-    filme: Optional["Filme"] = None
-    datas_horarios: List[DataHorario] = []
-
-    class Config:
-        from_attributes = True
+    # filme: Optional["Filme"] = None
+    # cinema: Optional["Cinema"] = None
+    horarios: List[DataHorario] = []
+    model_config = ConfigDict(from_attributes=True)
 
 class SessaoUpdate(BaseModel):
     linguagem: Optional[str] = None
@@ -44,8 +43,4 @@ class SessaoUpdate(BaseModel):
 
 class DataHorarioUpdate(BaseModel):
     dataHora: Optional[datetime] = None
-    sessao_id_FK: Optional[int] = None
-
-# Forward references
-Cinema = ForwardRef("Cinema")
-Filme = ForwardRef("Filme") 
+    sessao_id_FK: Optional[int] = None 
