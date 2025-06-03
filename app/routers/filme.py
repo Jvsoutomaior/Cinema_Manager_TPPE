@@ -1,19 +1,19 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from .. import models
-from ..schemas import filme as schemas
+from ..models.filme import Filme as filmeModel
+from ..schemas.filme import Filme, FilmeCreate
 from ..database import get_db
 
 router = APIRouter()
 
-@router.post("/", response_model=schemas.Filme)
-def create_filme(filme: schemas.FilmeCreate, db: Session = Depends(get_db)):
-    db_filme = models.Filme(**filme.model_dump())
-    db.add(db_filme)
+@router.post("/", response_model=Filme)
+def create_filme(filme: FilmeCreate, db: Session = Depends(get_db)):
+    new_filme = filmeModel(**filme.model_dump())
+    db.add(new_filme)
     db.commit()
-    db.refresh(db_filme)
-    return db_filme
+    db.refresh(new_filme)
+    return new_filme
 
 # @router.get("/", response_model=List[schemas.Filme])
 # def read_filmes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
