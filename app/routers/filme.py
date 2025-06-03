@@ -15,17 +15,19 @@ def create_filme(filme: FilmeCreate, db: Session = Depends(get_db)):
     db.refresh(new_filme)
     return new_filme
 
+@router.get("/{filme_id}", response_model=Filme)
+def read_filme(filme_id: int, db: Session = Depends(get_db)):
+    db_filme = db.query(filmeModel).filter(filmeModel.id == filme_id).first()
+    if db_filme is None:
+        raise HTTPException(status_code=404, detail="Filme not found")
+    return db_filme
+
 # @router.get("/", response_model=List[schemas.Filme])
 # def read_filmes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 #     filmes = db.query(models.Filme).offset(skip).limit(limit).all()
 #     return filmes
 
-# @router.get("/{filme_id}", response_model=schemas.Filme)
-# def read_filme(filme_id: int, db: Session = Depends(get_db)):
-#     db_filme = db.query(models.Filme).filter(models.Filme.id == filme_id).first()
-#     if db_filme is None:
-#         raise HTTPException(status_code=404, detail="Filme not found")
-#     return db_filme
+
 
 # @router.put("/{filme_id}", response_model=schemas.Filme)
 # def update_filme(filme_id: int, filme: schemas.FilmeUpdate, db: Session = Depends(get_db)):
