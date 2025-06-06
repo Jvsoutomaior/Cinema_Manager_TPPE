@@ -31,4 +31,4 @@ ENTRYPOINT []
 # Default command to run tests
 # CMD ["pytest", "--maxfail=1", "--disable-warnings", "-v"]
 
-CMD ["pytest", "./tests/tests_main.py"]
+CMD ["pytest", "./tests/"]
