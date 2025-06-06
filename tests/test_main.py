@@ -18,7 +18,3 @@ def db():
         yield db
     finally:
         db.close()
-
-def drop_all_tables():
-    # Drop all tables in the database
-    Base.metadata.drop_all(bind=engine)

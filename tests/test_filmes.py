@@ -142,4 +142,9 @@ def test_delete_filme(db: Session):
     response = client.get(f"/filmes/{created_filme['id']}")
     assert response.status_code == 404
 
-# Clean up the database after the test
+# Clean up the database after test
+@pytest.fixture(scope="function", autouse=True)
+def cleanup_db(db: Session):
+    yield
+    db.query(Filme).delete()
+    db.commit()
