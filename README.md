@@ -23,7 +23,7 @@ source .venv/bin/activate
 
 - install dependencies:
 ```bash
-uv sync
+uv sync --all-groups
 ```
 
 - run the project:
@@ -31,26 +31,25 @@ uv sync
 fastapi dev
 ```
 
-## docker
-requirements:
-- docker
-
-```
-docker build -t app .
-```
-
-Then run the project:
-```bash
-docker run -p 8000:8000 app
-```
-
-## docker-compose
+## run the project inside docker containers
 requirements:
 - docker
 - docker-compose
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
-Access
-http://localhost:15432
+Access : <br>
+API at: http://0.0.0.0:8000/ <br>
+Swagger UI at: http://0.0.0.0:8000/docs <br>
+pgadmin at: http://localhost:15432/ <br>
+
+inside pgadmin:
+- to login:<br>
+    - email: admin@admin.com<br>
+    - password: password<br>
+- to connect to database:<br>
+    - add new server (name can be whatever name) -> connection tab: <br>
+        - host: database<br>
+        - username: admin<br>
+        - password: password<br>
