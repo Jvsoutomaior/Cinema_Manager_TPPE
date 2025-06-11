@@ -8,13 +8,8 @@ services:
     networks:
       - postgres-network
     depends_on:
-      - database
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
+      database:
+        condition: service_healthy
   
   database:
     image: postgres
@@ -26,6 +21,12 @@ services:
       - 5432:5432
     networks:
       - postgres-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d MyDatabase"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
   
   pgadmin:
     image: dpage/pgadmin4
@@ -44,7 +45,7 @@ services:
       context: .
       dockerfile: Dockerfile.test
     depends_on:
-      app:
+      database:
         condition: service_healthy
         restart: true
     networks:
