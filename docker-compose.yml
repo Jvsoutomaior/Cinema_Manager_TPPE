@@ -9,6 +9,12 @@ services:
       - postgres-network
     depends_on:
       - database
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
   
   database:
     image: postgres
@@ -38,7 +44,9 @@ services:
       context: .
       dockerfile: Dockerfile.test
     depends_on:
-      - app
+      app:
+        condition: service_healthy
+        restart: true
     networks:
       - postgres-network
     environment: # needs this to connect to the database
