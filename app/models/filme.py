@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-# from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 from app.database import Base
 
 class Filme(Base):
@@ -11,4 +11,4 @@ class Filme(Base):
     sinopse = Column(String, nullable=True)
     classificacao_indicativa = Column(String, nullable=True)
     duracao = Column(String, nullable=True)
-    # sessoes = relationship("Sessao", back_populates="filme") 
+    sessoes = relationship("Sessao", back_populates="filme") 

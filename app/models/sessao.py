@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
-# from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 from app.database import Base
 
 class Sessao(Base):
@@ -10,9 +10,9 @@ class Sessao(Base):
     sala = Column(String, nullable=False)
     cinema_id_FK = Column(Integer, ForeignKey("cinemas.id"))
     filme_id_FK = Column(Integer, ForeignKey("filmes.id"))
-    # cinema = relationship("Cinema", back_populates="sessoes")
-    # filme = relationship("Filme", back_populates="sessoes")
-    # ingressos = relationship("Ingresso", back_populates="sessao")
+    cinema = relationship("Cinema", back_populates="sessoes")
+    filme = relationship("Filme", back_populates="sessoes")
+    ingressos = relationship("Ingresso", back_populates="sessao")
     datas_horarios = relationship("DataHorario", back_populates="sessao")
 
 class DataHorario(Base):
