@@ -1,6 +1,10 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from app.database import Base
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .sessao import Seessao
 
 class Filme(Base):
     __tablename__ = "filmes"

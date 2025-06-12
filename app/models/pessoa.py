@@ -1,6 +1,12 @@
 from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database import Base
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .cinema import Cinema
+    from .ingresso import Ingresso
+    from .sessao import Sessao
 
 class Pessoa(Base):
     __tablename__ = "pessoas"

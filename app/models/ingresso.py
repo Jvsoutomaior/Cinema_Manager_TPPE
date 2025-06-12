@@ -1,6 +1,11 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database import Base
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .sessao import Sessao
+    from .pessoa import Cliente
 
 class Ingresso(Base):
     __tablename__ = "ingressos"
