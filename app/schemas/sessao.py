@@ -2,9 +2,9 @@ from pydantic import BaseModel, ConfigDict
 from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 
-#if TYPE_CHECKING:
-#    from .filme import Filme
-#    from .cinema import Cinema
+if TYPE_CHECKING:
+   from .filme import Filme
+   from .cinema import Cinema
 
 class DataHorarioBase(BaseModel):
     data: datetime
@@ -29,8 +29,8 @@ class SessaoCreate(SessaoBase):
 
 class Sessao(SessaoBase):
     id: int
-    # filme: Optional["Filme"] = None
-    # cinema: Optional["Cinema"] = None
+    filme: Optional["Filme"] = None
+    cinema: Optional["Cinema"] = None
     horarios: List[DataHorario] = []
     model_config = ConfigDict(from_attributes=True)
 
