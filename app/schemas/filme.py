@@ -3,6 +3,8 @@ from typing import List, Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
    from .sessao import Sessao
+else:
+    Sessao = None
 
 class FilmeBase(BaseModel):
     titulo: str
@@ -26,4 +28,9 @@ class FilmeUpdate(BaseModel):
     genero: Optional[str] = None
     sinopse: Optional[str] = None
     classificacao_indicativa: Optional[str] = None
-    duracao: Optional[str] = None 
+    duracao: Optional[str] = None
+
+
+
+from .sessao import Sessao
+Filme.model_rebuild()

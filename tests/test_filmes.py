@@ -4,7 +4,7 @@ import pytest
 
 
 # teste de criação de filme
-@pytest.fixture(scope="function")
+
 def test_create_filme():
     filme_data = {
         "titulo": "O Senhor dos Anéis",
