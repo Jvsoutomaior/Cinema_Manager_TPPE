@@ -4,7 +4,6 @@ from datetime import datetime
 
 if TYPE_CHECKING:
    from .filme import Filme
-   from .cinema import Cinema
 
 class DataHorarioBase(BaseModel):
     data: datetime
@@ -30,7 +29,6 @@ class SessaoCreate(SessaoBase):
 class Sessao(SessaoBase):
     id: int
     filme: Optional["Filme"] = None
-    cinema: Optional["Cinema"] = None
     horarios: List[DataHorario] = []
     model_config = ConfigDict(from_attributes=True)
 
@@ -38,7 +36,6 @@ class SessaoUpdate(BaseModel):
     linguagem: Optional[str] = None
     is_3d: Optional[bool] = None
     sala: Optional[str] = None
-    cinema_id_FK: Optional[int] = None
     filme_id_FK: Optional[int] = None
 
 class DataHorarioUpdate(BaseModel):

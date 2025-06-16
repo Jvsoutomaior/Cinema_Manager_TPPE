@@ -4,7 +4,6 @@ from app.database import Base
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .cinema import Cinema
     from .filme import Filme
 
 class Sessao(Base):
@@ -13,9 +12,7 @@ class Sessao(Base):
     linguagem = Column(String, nullable=True)
     is_3d = Column(Boolean, default=False)
     sala = Column(String, nullable=False)
-    cinema_id_FK = Column(Integer, ForeignKey("cinemas.id"))
     filme_id_FK = Column(Integer, ForeignKey("filmes.id"))
-    cinema = relationship("Cinema")
     filme = relationship("Filme")
     datas_horarios = relationship("DataHorario", back_populates="sessao")
 

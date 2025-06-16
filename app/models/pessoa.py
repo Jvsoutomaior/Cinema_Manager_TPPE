@@ -1,10 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database import Base
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from .cinema import Cinema
 
 class Pessoa(Base):
     __tablename__ = "pessoas"
@@ -13,8 +9,6 @@ class Pessoa(Base):
     data_nascimento = Column(Date, nullable=False)
     email = Column(String, nullable=False)
     tipo = Column(String)
-    cinema_id_FK = Column(Integer, ForeignKey("cinemas.id"))
-    cinema = relationship("Cinema")
     __mapper_args__ = {"polymorphic_identity": "pessoa", "polymorphic_on": tipo}
 
 class Funcionario(Pessoa):

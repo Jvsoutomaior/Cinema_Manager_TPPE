@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from .database import engine, Base, SessionLocal, init_db
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import router
-from .routers import cinema, filme, ingresso, pessoa, sessao
+from .routers import filme, ingresso, pessoa, sessao
 
 app = FastAPI(
     title="Cinema Manager API",
@@ -35,7 +35,6 @@ init_db()
 Base.metadata.create_all(bind=engine)
 
 # Include all routers
-app.include_router(cinema.router, prefix="/cinemas", tags=["cinemas"])
 app.include_router(filme.router, prefix="/filmes", tags=["filmes"])
 app.include_router(ingresso.router, prefix="/ingressos", tags=["ingressos"])
 app.include_router(pessoa.router, prefix="/pessoas", tags=["pessoas"])
