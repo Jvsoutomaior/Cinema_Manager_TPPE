@@ -1,10 +1,5 @@
 from pydantic import BaseModel, ConfigDict
-from typing import List, Optional, TYPE_CHECKING
-
-if TYPE_CHECKING:
-   from .sessao import Sessao
-else:
-    Sessao = None
+from typing import Optional
 
 class FilmeBase(BaseModel):
     titulo: str
@@ -19,7 +14,6 @@ class FilmeCreate(FilmeBase):
 
 class Filme(FilmeBase):
     id: int
-    sessoes: List["Sessao"] = []
     model_config = ConfigDict(from_attributes=True)
 
 class FilmeUpdate(BaseModel):
@@ -29,8 +23,3 @@ class FilmeUpdate(BaseModel):
     sinopse: Optional[str] = None
     classificacao_indicativa: Optional[str] = None
     duracao: Optional[str] = None
-
-
-
-from .sessao import Sessao
-Filme.model_rebuild()

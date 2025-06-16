@@ -1,9 +1,5 @@
 from pydantic import BaseModel, ConfigDict
-from typing import List, Optional, TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from .sessao import Sessao
-    from .pessoa import PessoaBase
+from typing import List, Optional
 
 class CinemaBase(BaseModel):
     nome: str
@@ -16,8 +12,6 @@ class CinemaCreate(CinemaBase):
 
 class Cinema(CinemaBase):
     id: int
-    sessoes: List["Sessao"] = []
-    pessoas: List["PessoaBase"] = []
     model_config = ConfigDict(from_attributes=True)
 
 class CinemaUpdate(BaseModel):

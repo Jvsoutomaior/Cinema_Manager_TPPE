@@ -5,8 +5,6 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .cinema import Cinema
-    from .ingresso import Ingresso
-    from .sessao import Sessao
 
 class Pessoa(Base):
     __tablename__ = "pessoas"
@@ -16,7 +14,7 @@ class Pessoa(Base):
     email = Column(String, nullable=False)
     tipo = Column(String)
     cinema_id_FK = Column(Integer, ForeignKey("cinemas.id"))
-    cinema = relationship("Cinema", back_populates="pessoas")
+    cinema = relationship("Cinema")
     __mapper_args__ = {"polymorphic_identity": "pessoa", "polymorphic_on": tipo}
 
 class Funcionario(Pessoa):
@@ -30,5 +28,4 @@ class Cliente(Pessoa):
     __tablename__ = "clientes"
     cpf = Column(String, ForeignKey("pessoas.cpf"), primary_key=True)
     fidelidade = Column(Float, default=0.0)
-    ingressos = relationship("Ingresso", back_populates="clientes")
     __mapper_args__ = {"polymorphic_identity": "cliente"} 
