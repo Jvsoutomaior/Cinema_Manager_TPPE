@@ -22,6 +22,8 @@ ADD . /cinema
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
+RUN apt-get update && apt-get install -y curl
+
 # Place executables in the environment at the front of the path
 ENV PATH="/cinema/.venv/bin:$PATH"
 
