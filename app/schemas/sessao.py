@@ -6,7 +6,7 @@ if TYPE_CHECKING:
    from .filme import Filme
 
 class DataHorarioBase(BaseModel):
-    data: datetime
+    dataHora: datetime
     sessao_id_FK: int
 
 class DataHorarioCreate(DataHorarioBase):
@@ -20,7 +20,6 @@ class SessaoBase(BaseModel):
     linguagem: Optional[str] = None
     is_3d: bool = False
     sala: str
-    cinema_id_FK: int
     filme_id_FK: int
 
 class SessaoCreate(SessaoBase):
