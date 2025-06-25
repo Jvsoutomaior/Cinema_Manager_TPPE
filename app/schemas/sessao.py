@@ -2,12 +2,11 @@ from pydantic import BaseModel, ConfigDict
 from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 
-if TYPE_CHECKING:
-   from .filme import Filme
+from .filme import Filme
 
 class DataHorarioBase(BaseModel):
     dataHora: datetime
-    sessao_id_FK: int
+    sessao_id: int
 
 class DataHorarioCreate(DataHorarioBase):
     pass
@@ -15,6 +14,10 @@ class DataHorarioCreate(DataHorarioBase):
 class DataHorario(DataHorarioBase):
     id: int
     model_config = ConfigDict(from_attributes=True)
+
+class DataHorarioUpdate(BaseModel):
+    dataHora: Optional[datetime] = None
+
 
 class SessaoBase(BaseModel):
     linguagem: Optional[str] = None
@@ -28,7 +31,7 @@ class SessaoCreate(SessaoBase):
 class Sessao(SessaoBase):
     id: int
     filme: Optional["Filme"] = None
-    horarios: List[DataHorario] = []
+    datas_horarios: List[DataHorario] = []
     model_config = ConfigDict(from_attributes=True)
 
 class SessaoUpdate(BaseModel):
@@ -37,6 +40,6 @@ class SessaoUpdate(BaseModel):
     sala: Optional[str] = None
     filme_id_FK: Optional[int] = None
 
-class DataHorarioUpdate(BaseModel):
-    dataHora: Optional[datetime] = None
-    sessao_id_FK: Optional[int] = None 
+
+
+Sessao.model_rebuild()

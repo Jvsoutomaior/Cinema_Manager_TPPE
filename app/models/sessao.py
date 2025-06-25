@@ -14,11 +14,11 @@ class Sessao(Base):
     sala = Column(String, nullable=False)
     filme_id_FK = Column(Integer, ForeignKey("filmes.id"))
     filme = relationship("Filme")
-    datas_horarios = relationship("DataHorario", back_populates="sessao")
+    datas_horarios = relationship("DataHorario", back_populates="sessao", cascade="all, delete-orphan")
 
 class DataHorario(Base):
     __tablename__ = "datas_horarios"
     id = Column(Integer, primary_key=True, index=True)
     dataHora = Column(DateTime, index=True)
-    sessao_id_FK = Column(Integer, ForeignKey("sessoes.id"))
-    sessao = relationship("Sessao", back_populates="datas_horarios") 
+    sessao_id = Column(Integer, ForeignKey("sessoes.id"))
+    sessao = relationship("Sessao", back_populates="datas_horarios")
