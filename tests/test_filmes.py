@@ -1,7 +1,8 @@
-from .test_main import client
+from .test_main import client, delete_all_registries
 from app.models.filme import Filme
 import pytest
 
+delete_all_registries("filmes")
 
 @pytest.fixture
 def sample_filme():
@@ -83,3 +84,4 @@ def test_delete_nonexistent_filme():
     response = client.delete("/filmes/99999")
     assert response.status_code == 404
 
+delete_all_registries("filmes")
