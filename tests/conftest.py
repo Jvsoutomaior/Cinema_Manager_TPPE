@@ -65,23 +65,3 @@ def client(db_session):
     
     # Clean up the override after each test
     app.dependency_overrides.clear()
-
-# Helper functions for test data cleanup (if needed as backup)
-def truncate_tables(session, *table_names):
-    """Helper function to truncate specific tables if rollback fails"""
-    for table_name in table_names:
-        try:
-            session.execute(f"TRUNCATE TABLE {table_name} RESTART IDENTITY CASCADE;")
-            session.commit()
-        except Exception as e:
-            session.rollback()
-            print(f"Warning: Could not truncate {table_name}: {e}")
-
-def delete_all_records(session, model_class):
-    """Helper function to delete all records from a specific model"""
-    try:
-        session.query(model_class).delete()
-        session.commit()
-    except Exception as e:
-        session.rollback()
-        print(f"Warning: Could not delete records from {model_class.__name__}: {e}")
