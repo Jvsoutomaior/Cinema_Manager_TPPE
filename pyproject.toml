@@ -1,7 +1,7 @@
 [project]
-name = "example"
+name = "cinema-manager"
 version = "0.1.0"
-description = "Add your description here"
+description = "A REST API for managing cinema operations including movies, sessions, tickets, and people"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
