@@ -1,13 +1,81 @@
+# Python
 .venv
 __pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.coverage
+.pytest_cache
+.tox
+.cache
+nosetests.xml
+coverage.xml
+*.log
+
+# Project specific
 documentos
+test-results
+*.db
+*.sqlite
+*.sqlite3
+
+# Documentation
 README.md
+CHANGELOG.md
+DOCS.md
+ARCHITECTURE.md
+DATA_MODEL_IMPROVEMENTS.md
+TESTING.md
+
+# Development
+.env
+.env.local
+.env.*.local
 
 # Docker
-docker-compose.yml
-Dockerfile
+docker-compose*.yml
+Dockerfile*
 .dockerignore
 
-# git
+# Git
 .gitignore
 .git
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+.circleci
+
+# Security
+*.pem
+*.key
+*.crt
+secrets
+
+# Temporary files
+tmp
+temp
+*.tmp
+*.temp
