@@ -1,16 +1,13 @@
-from fastapi.testclient import TestClient
-from sqlalchemy import text
-from app.main import app
-from app.database import get_db
-from app.models.filme import Filme
+# This file now only contains basic API tests
+# The client fixture and database session are handled in conftest.py
 
+def test_read_root(client):
+    """Test the root endpoint"""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Welcome to Cinema Manager API"}
 
-client = TestClient(app)
-
-def delete_all_registries(table_name: str):
-    db = next(get_db())
-    try:
-        db.execute(text(f'TRUNCATE {table_name} RESTART IDENTITY CASCADE;'))
-        db.commit()
-    except Exception as e:
-        print(f"Error: {str(e)}")
+def test_api_health(client):
+    """Test that the API is responsive"""
+    response = client.get("/")
+    assert response.status_code == 200

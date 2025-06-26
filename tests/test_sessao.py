@@ -1,39 +1,36 @@
-from .test_main import client, delete_all_registries
-from app.models.filme import Filme
 import pytest
-
-
-delete_all_registries("sessoes")
-delete_all_registries("filmes")
 
 @pytest.fixture
 def sample_filme():
     """Cria um filme para ser usado nas sessões"""
-    filme_data = {
+    return {
         "titulo": "Vingadores: Ultimato",
-        "ano": "2019",
-        "genero": "Ação",
+        "ano": 2019,  # Changed to integer
+        "genero": "Ação",  # Using enum value
         "sinopse": "Os Vingadores se unem para enfrentar Thanos.",
-        "classificacao_indicativa": "12",
-        "duracao": "3h1min"
+        "classificacao_indicativa": "12",  # Using enum value
+        "duracao": 181  # Changed to integer (minutes)
     }
-    response = client.post("/filmes/", json=filme_data)
+
+@pytest.fixture
+def created_filme(client, sample_filme):
+    """Creates a filme and returns the response data"""
+    response = client.post("/filmes/", json=sample_filme)
     return response.json()
 
 
 @pytest.fixture
-def sample_sessao(sample_filme):
+def sample_sessao(created_filme):
     """Cria dados de exemplo para uma sessão"""
     return {
         "linguagem": "Português",
         "is_3d": True,
         "sala": "Sala 1",
-        "filme_id_FK": sample_filme["id"]
+        "filme_id_FK": created_filme["id"]
     }
 
-
 @pytest.fixture
-def created_sessao(sample_sessao):
+def created_sessao(client, sample_sessao):
     """Cria uma sessão e retorna os dados"""
     response = client.post("/sessoes/", json=sample_sessao)
     return response.json()
@@ -45,8 +42,7 @@ def sample_data_horario():
         "dataHora": "2023-10-01T15:30:00"
     }
 
-
-def test_create_sessao(sample_sessao):
+def test_create_sessao(client, sample_sessao):
     """Testa a criação de uma sessão"""
     response = client.post("/sessoes/", json=sample_sessao)
     assert response.status_code == 200
@@ -57,8 +53,7 @@ def test_create_sessao(sample_sessao):
     assert data["filme_id_FK"] == sample_sessao["filme_id_FK"]
     assert "id" in data
 
-
-def test_read_sessao(created_sessao):
+def test_read_sessao(client, created_sessao):
     """Testa a leitura de uma sessão específica"""
     response = client.get(f"/sessoes/{created_sessao['id']}")
     assert response.status_code == 200
@@ -68,8 +63,7 @@ def test_read_sessao(created_sessao):
     assert data["is_3d"] == created_sessao["is_3d"]
     assert data["sala"] == created_sessao["sala"]
 
-
-def test_read_all_sessoes(created_sessao):
+def test_read_all_sessoes(client, created_sessao):
     """Testa a leitura de todas as sessões"""
     response = client.get("/sessoes/")
     assert response.status_code == 200
@@ -79,8 +73,7 @@ def test_read_all_sessoes(created_sessao):
     # Verifica se a sessão criada está na lista
     assert any(sessao["id"] == created_sessao["id"] for sessao in data)
 
-
-def test_update_sessao(created_sessao):
+def test_update_sessao(client, created_sessao):
     """Testa a atualização de uma sessão"""
     update_data = {
         "linguagem": "Inglês",
@@ -96,11 +89,7 @@ def test_update_sessao(created_sessao):
     assert data["sala"] == update_data["sala"]
     assert data["filme_id_FK"] == created_sessao["filme_id_FK"]
 
-
-def test_delete_sessao(created_sessao):
+def test_delete_sessao(client, created_sessao):
     """Testa a exclusão de uma sessão"""
     response = client.delete(f"/sessoes/{created_sessao['id']}")
     assert response.status_code == 200
-
-delete_all_registries("sessoes")
-delete_all_registries("filmes")

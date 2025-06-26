@@ -1,26 +1,22 @@
-from .test_main import client, delete_all_registries
-from app.models.filme import Filme
 import pytest
-
-delete_all_registries("filmes")
 
 @pytest.fixture
 def sample_filme():
     return {
         "titulo": "O Senhor dos Anéis",
-        "ano": "2001",
-        "genero": "Fantasia",
+        "ano": 2001,  # Changed to integer
+        "genero": "Fantasia",  # Using enum value
         "sinopse": "Uma aventura épica na Terra Média.",
-        "classificacao_indicativa": "12",
-        "duracao": "3h48min"
+        "classificacao_indicativa": "12",  # Using enum value
+        "duracao": 228  # Changed to integer (minutes)
     }
 
 @pytest.fixture
-def created_filme(sample_filme):
+def created_filme(client, sample_filme):
     response = client.post("/filmes/", json=sample_filme)
     return response.json()
 
-def test_create_filme(sample_filme):
+def test_create_filme(client, sample_filme):
     response = client.post("/filmes/", json=sample_filme)
     assert response.status_code == 200
     data = response.json()
@@ -32,18 +28,18 @@ def test_create_filme(sample_filme):
     assert data["duracao"] == sample_filme["duracao"]
     assert "id" in data
 
-def test_read_filme(created_filme):
+def test_read_filme(client, created_filme):
     response = client.get(f"/filmes/{created_filme['id']}")
     assert response.status_code == 200
     data = response.json()
     assert data["id"] == created_filme["id"]
     assert data["titulo"] == created_filme["titulo"]
 
-def test_read_nonexistent_filme():
+def test_read_nonexistent_filme(client):
     response = client.get("/filmes/99999")
     assert response.status_code == 404
 
-def test_read_all_filmes(created_filme):
+def test_read_all_filmes(client, created_filme):
     response = client.get("/filmes/")
     assert response.status_code == 200
     data = response.json()
@@ -51,7 +47,7 @@ def test_read_all_filmes(created_filme):
     assert len(data) > 0
     assert any(filme["id"] == created_filme["id"] for filme in data)
 
-def test_update_filme(created_filme):
+def test_update_filme(client, created_filme):
     update_data = {
         "titulo": "O Senhor dos Anéis: A Sociedade do Anel",
         "sinopse": "Uma nova aventura épica na Terra Média."
@@ -66,12 +62,12 @@ def test_update_filme(created_filme):
     assert data["ano"] == created_filme["ano"]
     assert data["genero"] == created_filme["genero"]
 
-def test_update_nonexistent_filme():
+def test_update_nonexistent_filme(client):
     update_data = {"titulo": "Novo Título"}
     response = client.put("/filmes/99999", json=update_data)
     assert response.status_code == 404
 
-def test_delete_filme(created_filme):
+def test_delete_filme(client, created_filme):
     response = client.delete(f"/filmes/{created_filme['id']}")
     assert response.status_code == 200
     assert response.json()["message"] == "Filme deleted successfully"
@@ -80,8 +76,6 @@ def test_delete_filme(created_filme):
     get_response = client.get(f"/filmes/{created_filme['id']}")
     assert get_response.status_code == 404
 
-def test_delete_nonexistent_filme():
+def test_delete_nonexistent_filme(client):
     response = client.delete("/filmes/99999")
     assert response.status_code == 404
-
-delete_all_registries("filmes")
