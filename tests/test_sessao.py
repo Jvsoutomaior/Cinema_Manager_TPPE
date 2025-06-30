@@ -2,7 +2,7 @@ import pytest
 
 @pytest.fixture
 def sample_filme():
-    """Cria um filme para ser usado nas sessões"""
+    """Exemplo de filme"""
     return {
         "titulo": "Vingadores: Ultimato",
         "ano": 2019,
@@ -21,7 +21,7 @@ def created_filme(client, sample_filme):
 
 @pytest.fixture
 def sample_sessao(created_filme):
-    """Cria dados de exemplo para uma sessão"""
+    """exemplo de sessão"""
     return {
         "linguagem": "Português",
         "is_3d": True,
@@ -37,7 +37,7 @@ def created_sessao(client, sample_sessao):
 
 @pytest.fixture
 def sample_data_horario():
-    """Cria dados de exemplo para um horário de sessão"""
+    """horario"""
     return {
         "dataHora": "2023-10-01T15:30:00"
     }
@@ -103,11 +103,24 @@ def test_create_data_horario(client, created_sessao, sample_data_horario):
     assert data["sessao_id"] == created_sessao["id"]
     assert "id" in data
 
-# def test_read_datas_horarios(client, created_sessao):
-#     """Testa a leitura de todos os horários de sessão de uma sessão específica"""
-#     response = client.get(f"/sessoes/{created_sessao['id']}/datas-horarios/")
-#     assert response.status_code == 200
-#     data = response.json()
-#     assert isinstance(data, list)
-#     assert len(data) > 0
-#     assert all(dh["sessao_id"] == created_sessao["id"] for dh in data)
+def test_read_datas_horarios(client, created_sessao, sample_data_horario):
+    """Testa a leitura de todos os horários de sessão de uma sessão específica"""
+    create_data_horario = client.post(f"/sessoes/{created_sessao['id']}/datas-horarios/", json=sample_data_horario)
+    data = create_data_horario.json()
+    response = client.get(f"/sessoes/{data['id']}/datas-horarios/")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) > 0
+    assert all(dh["sessao_id"] == created_sessao["id"] for dh in data)
+
+
+def test_delete_data_horario(client, created_sessao, sample_data_horario):
+    """Testa a exclusão de um horário de sessão"""
+    create_data_horario = client.post(f"/sessoes/{created_sessao['id']}/datas-horarios/", json=sample_data_horario)
+    data = create_data_horario.json()
+    response = client.delete(f"/sessoes/datas-horarios/{data['id']}")
+    assert response.status_code == 200
+
+    response = client.get(f"/sessoes/datas-horarios/{data['id']}")
+    assert response.status_code == 404

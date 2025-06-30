@@ -74,6 +74,9 @@ class DataHorarioRepository:
         """
         Retrieve all DataHorarios associated with a specific session from the database.
         """
+        sessao = sessaoRepository.get_sessao_by_id(db, sessao_id)
+        if not sessao:
+            raise ValueError(f"Sessao with id {sessao_id} not found.")
         return db.query(DataHorarioModel).filter(DataHorarioModel.sessao_id == sessao_id).all()
 
     @staticmethod

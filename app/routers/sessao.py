@@ -64,10 +64,7 @@ def create_data_horario(sessao_id: int, data_horario: DataHorarioCreate, db: Ses
 @router.get("/{sessao_id}/datas-horarios/", response_model=List[DataHorario])
 def read_datas_horarios(sessao_id: int, db: Session = Depends(get_db)):
     """(GET) Endpoint to retrieve all data_horarios from a specific session"""
-    datas_horarios = DataHorarioRepository.get_all_DataHorarios_from_specif_session(db, sessao_id)
-    if not datas_horarios:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No DataHorarios found for this Sessao")
-    return datas_horarios
+    return DataHorarioRepository.get_all_DataHorarios_from_specif_session(db, sessao_id)
 
 @router.get("/datas-horarios/{data_horario_id}", response_model=DataHorario)
 def read_data_horario(data_horario_id: int, db: Session = Depends(get_db)):
