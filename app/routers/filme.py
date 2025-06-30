@@ -1,52 +1,50 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 from typing import List
 from ..models.filme import Filme as filmeModel
 from ..schemas.filme import Filme, FilmeCreate, FilmeUpdate
 from ..database import get_db
+from ..repository.filme import FilmeRepository
 
 router = APIRouter()
 
-@router.post("/", response_model=Filme)
-def create_filme(filme: FilmeCreate, db: Session = Depends(get_db)):
-    new_filme = filmeModel(**filme.model_dump())
-    db.add(new_filme)
-    db.commit()
-    db.refresh(new_filme)
-    return new_filme
+@router.post("/", response_model=Filme, status_code=status.HTTP_201_CREATED)
+def create_filme(request: FilmeCreate, db: Session = Depends(get_db)):
+    """ POST endpoint to create a new movie.    """
+    filme = FilmeRepository.create_filme(db, filmeModel(**request.model_dump()))
+    return filme
+
 
 @router.get("/{filme_id}", response_model=Filme)
-def read_filme(filme_id: int, db: Session = Depends(get_db)):
-    db_filme = db.query(filmeModel).filter(filmeModel.id == filme_id).first()
+def get_filme_by_id(filme_id: int, db: Session = Depends(get_db)):
+    """ GET endpoint to retrieve a movie by its ID. """
+    db_filme = FilmeRepository.get_filme_by_id(db, filme_id)
     if db_filme is None:
-        raise HTTPException(status_code=404, detail="Filme not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Filme not found")
     return db_filme
 
+
 @router.get("/", response_model=List[Filme])
-def read_filmes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    filmes = db.query(filmeModel).offset(skip).limit(limit).all()
+def get_all_filmes(db: Session = Depends(get_db)):
+    """ GET endpoint to retrieve all movies. """
+    filmes = FilmeRepository.get_all_filmes(db)
     return filmes
 
 
 @router.put("/{filme_id}", response_model=Filme)
 def update_filme(filme_id: int, filme: FilmeUpdate, db: Session = Depends(get_db)):
-    db_filme = db.query(filmeModel).filter(filmeModel.id == filme_id).first()
-    if db_filme is None:
-        raise HTTPException(status_code=404, detail="Filme not found")
-    
-    for key, value in filme.model_dump(exclude_unset=True).items():
-        setattr(db_filme, key, value)
-    
-    db.commit()
-    db.refresh(db_filme)
+    """ PUT endpoint to update an existing movie. """
+    try:
+        db_filme = FilmeRepository.update_filme(db, filme_id, filme)
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
     return db_filme
 
 @router.delete("/{filme_id}")
 def delete_filme(filme_id: int, db: Session = Depends(get_db)):
-    db_filme = db.query(filmeModel).filter(filmeModel.id == filme_id).first()
-    if db_filme is None:
-        raise HTTPException(status_code=404, detail="Filme not found")
-    
-    db.delete(db_filme)
-    db.commit()
-    return {"message": "Filme deleted successfully"} 
+    """ DELETE endpoint to delete a movie by its ID. """
+    try:
+        FilmeRepository.delete_filme(db, filme_id)
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+    return Response(status_code=status.HTTP_200_OK, content=None)
