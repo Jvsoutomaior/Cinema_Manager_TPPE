@@ -5,11 +5,11 @@ def sample_filme():
     """Cria um filme para ser usado nas sessões"""
     return {
         "titulo": "Vingadores: Ultimato",
-        "ano": 2019,  # Changed to integer
-        "genero": "Ação",  # Using enum value
+        "ano": 2019,
+        "genero": "Ação",
         "sinopse": "Os Vingadores se unem para enfrentar Thanos.",
-        "classificacao_indicativa": "12",  # Using enum value
-        "duracao": 181  # Changed to integer (minutes)
+        "classificacao_indicativa": "12",
+        "duracao": 181
     }
 
 @pytest.fixture
@@ -70,7 +70,6 @@ def test_read_all_sessoes(client, created_sessao):
     data = response.json()
     assert isinstance(data, list)
     assert len(data) > 0
-    # Verifica se a sessão criada está na lista
     assert any(sessao["id"] == created_sessao["id"] for sessao in data)
 
 def test_update_sessao(client, created_sessao):
@@ -93,3 +92,22 @@ def test_delete_sessao(client, created_sessao):
     """Testa a exclusão de uma sessão"""
     response = client.delete(f"/sessoes/{created_sessao['id']}")
     assert response.status_code == 200
+
+
+def test_create_data_horario(client, created_sessao, sample_data_horario):
+    """Testa a criação de um horário de sessão associado a uma sessão específica"""
+    response = client.post(f"/sessoes/{created_sessao['id']}/datas-horarios/", json=sample_data_horario)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["dataHora"] == sample_data_horario["dataHora"]
+    assert data["sessao_id"] == created_sessao["id"]
+    assert "id" in data
+
+# def test_read_datas_horarios(client, created_sessao):
+#     """Testa a leitura de todos os horários de sessão de uma sessão específica"""
+#     response = client.get(f"/sessoes/{created_sessao['id']}/datas-horarios/")
+#     assert response.status_code == 200
+#     data = response.json()
+#     assert isinstance(data, list)
+#     assert len(data) > 0
+#     assert all(dh["sessao_id"] == created_sessao["id"] for dh in data)

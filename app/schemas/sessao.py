@@ -6,13 +6,13 @@ from .filme import Filme
 
 class DataHorarioBase(BaseModel):
     dataHora: datetime
-    sessao_id: int
 
 class DataHorarioCreate(DataHorarioBase):
     pass
 
 class DataHorario(DataHorarioBase):
     id: int
+    sessao_id: int
     model_config = ConfigDict(from_attributes=True)
 
 class DataHorarioUpdate(BaseModel):
