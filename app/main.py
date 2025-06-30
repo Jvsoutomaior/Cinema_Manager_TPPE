@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.orm import Session
-from .database import engine, Base, SessionLocal, init_db
+"""Main entrypoint for the Cinema Manager API."""
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import router
+from .database import engine, Base, init_db
 from .routers import filme, ingresso, pessoa, sessao
 
 app = FastAPI(
@@ -20,18 +20,8 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
 # Create tables at startup
 init_db()
-
-# Create database tables
 Base.metadata.create_all(bind=engine)
 
 # Include all routers
@@ -42,4 +32,5 @@ app.include_router(sessao.router, prefix="/sessoes", tags=["sessoes"])
 
 @app.get("/")
 def read_root():
+    """Root endpoint for health check and welcome message."""
     return {"message": "Welcome to Cinema Manager API"}
