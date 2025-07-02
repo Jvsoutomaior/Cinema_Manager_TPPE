@@ -2,8 +2,8 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .database import engine, Base, init_db
-from .routers import filme, ingresso, pessoa, sessao
+from .database import init_db
+from .routers import router
 
 app = FastAPI(
     title="Cinema Manager API",
@@ -22,13 +22,8 @@ app.add_middleware(
 
 # Create tables at startup
 init_db()
-Base.metadata.create_all(bind=engine)
 
-# Include all routers
-app.include_router(filme.router, prefix="/filmes", tags=["filmes"])
-app.include_router(ingresso.router, prefix="/ingressos", tags=["ingressos"])
-app.include_router(pessoa.router, prefix="/pessoas", tags=["pessoas"])
-app.include_router(sessao.router, prefix="/sessoes", tags=["sessoes"])
+app.include_router(router)
 
 @app.get("/")
 def read_root():
