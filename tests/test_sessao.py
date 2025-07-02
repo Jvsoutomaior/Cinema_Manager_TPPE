@@ -100,19 +100,19 @@ def test_create_data_horario(client, created_sessao, sample_data_horario):
     assert response.status_code == 200
     data = response.json()
     assert data["dataHora"] == sample_data_horario["dataHora"]
-    assert data["sessao_id"] == created_sessao["id"]
+    assert data["sessao_id_FK"] == created_sessao["id"]
     assert "id" in data
 
 def test_read_datas_horarios(client, created_sessao, sample_data_horario):
     """Testa a leitura de todos os horários de sessão de uma sessão específica"""
     create_data_horario = client.post(f"/sessoes/{created_sessao['id']}/datas-horarios/", json=sample_data_horario)
     data = create_data_horario.json()
-    response = client.get(f"/sessoes/{data['id']}/datas-horarios/")
+    response = client.get(f"/sessoes/{created_sessao['id']}/datas-horarios/")
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
     assert len(data) > 0
-    assert all(dh["sessao_id"] == created_sessao["id"] for dh in data)
+    assert all(dh["sessao_id_FK"] == created_sessao["id"] for dh in data)
 
 
 def test_delete_data_horario(client, created_sessao, sample_data_horario):

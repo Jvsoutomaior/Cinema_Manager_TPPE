@@ -77,7 +77,7 @@ class DataHorarioRepository:
         sessao = sessaoRepository.get_sessao_by_id(db, sessao_id)
         if not sessao:
             raise ValueError(f"Sessao with id {sessao_id} not found.")
-        return db.query(DataHorarioModel).filter(DataHorarioModel.sessao_id == sessao_id).all()
+        return db.query(DataHorarioModel).filter(DataHorarioModel.sessao_id_FK == sessao_id).all()
 
     @staticmethod
     def create_DataHorario_associated_with_session(db: Session, DataHorario: DataHorarioModel, sessao_id: int) -> DataHorarioModel:
@@ -87,7 +87,7 @@ class DataHorarioRepository:
         if DataHorarioRepository.get_DataHorario_by_id(db, DataHorario.id):
             raise ValueError(f"DataHorario with id {DataHorario.id} already exists.")
         else:
-            DataHorario.sessao_id = sessao_id
+            DataHorario.sessao_id_FK = sessao_id
             db.add(DataHorario)
             db.commit()
             db.refresh(DataHorario)

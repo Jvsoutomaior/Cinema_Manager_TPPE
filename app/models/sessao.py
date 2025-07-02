@@ -23,6 +23,6 @@ class DataHorario(Base):
     id = Column(Integer, primary_key=True, index=True)
     
     dataHora = Column(DateTime, index=True)
-    sessao_id = Column(Integer, ForeignKey("sessoes.id"))
+    sessao_id_FK = Column(Integer, ForeignKey("sessoes.id"))
     
     sessao = relationship("Sessao", back_populates="datas_horarios")

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 from typing import List
 from ..models.filme import Filme as filmeModel
-from ..schemas.filme import Filme, FilmeCreate, FilmeUpdate
+from ..schemas import Filme, FilmeCreate, FilmeUpdate
 from ..database import get_db
 from ..repository.filme import FilmeRepository
 

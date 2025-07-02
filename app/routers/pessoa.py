@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from ..models.pessoa import Funcionario as FuncionarioModel
 from ..models.pessoa import Cliente as clienteModel
-from ..schemas.pessoa import Funcionario, FuncionarioCreate, FuncionarioUpdate, Cliente, ClienteCreate, ClienteUpdate
+from ..schemas import Funcionario, FuncionarioCreate, FuncionarioUpdate, Cliente, ClienteCreate, ClienteUpdate
 from ..database import get_db
 from ..repository.pessoa import ClienteRepository, FuncionarioRepository
 

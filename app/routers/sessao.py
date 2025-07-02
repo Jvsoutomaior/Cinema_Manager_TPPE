@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from ..models.sessao import Sessao as SessaoModel
 from ..models.sessao import DataHorario as DataHorarioModel
-from ..schemas.sessao import Sessao, SessaoCreate, SessaoUpdate, DataHorario, DataHorarioCreate, DataHorarioUpdate
+from ..schemas import Sessao, SessaoCreate, SessaoUpdate, DataHorario, DataHorarioCreate, DataHorarioUpdate
 from ..repository.sessao import sessaoRepository, DataHorarioRepository
 from ..database import get_db
 

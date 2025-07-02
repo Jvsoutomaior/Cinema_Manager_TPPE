@@ -12,7 +12,7 @@ class DataHorarioCreate(DataHorarioBase):
 
 class DataHorario(DataHorarioBase):
     id: int
-    sessao_id: int
+    sessao_id_FK: int  # Fixed to match database field name
     model_config = ConfigDict(from_attributes=True)
 
 class DataHorarioUpdate(BaseModel):
@@ -39,7 +39,3 @@ class SessaoUpdate(BaseModel):
     is_3d: Optional[bool] = None
     sala: Optional[str] = None
     filme_id_FK: Optional[int] = None
-
-
-
-Sessao.model_rebuild()

@@ -17,7 +17,7 @@ class IngressoCreate(IngressoBase):
 class Ingresso(IngressoBase):
     id: int
     sessao: Optional["Sessao"] = None
-    clientes: Optional["Cliente"] = None
+    cliente: Optional["Cliente"] = None
     model_config = ConfigDict(from_attributes=True)
 
 class IngressoUpdate(BaseModel):
@@ -25,3 +25,4 @@ class IngressoUpdate(BaseModel):
     tipo: Optional[str] = None
     sessao_id_FK: Optional[int] = None
     cliente_cpf_FK: Optional[str] = None
+
