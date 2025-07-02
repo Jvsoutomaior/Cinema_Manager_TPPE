@@ -1,0 +1,41 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    env_file:
+      - .env.prod
+    ports:
+      - 8000:8000
+    networks:
+      - postgres-network
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+  
+  database:
+    image: postgres
+    environment:
+      POSTGRES_DB: MyDatabase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD : password
+    ports:
+      - 5432:5432
+    networks:
+      - postgres-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d MyDatabase"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+networks: 
+  postgres-network:
+    driver: bridge

@@ -35,6 +35,9 @@ TESTING.md
 .env
 .env.local
 .env.*.local
+.evn.dev
+.env.example
+.env.prod
 
 # Docker
 docker-compose*.yml
