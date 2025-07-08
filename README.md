@@ -53,3 +53,10 @@ inside pgadmin:
         - host: database<br>
         - username: admin<br>
         - password: password<br>
+
+## Pylint
+To run pylint
+(activate env and sync uv before this)
+```bash
+pylint . --ignore=.venv
+```
