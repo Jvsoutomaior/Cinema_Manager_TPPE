@@ -37,7 +37,7 @@ requirements:
 - docker-compose
 
 ```bash
-docker compose -f docker-compose.dev.yml up --build
+docker compose up --build
 ```
 Access : <br>
 API at: http://0.0.0.0:8000/ <br>
